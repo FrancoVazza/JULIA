@@ -3,7 +3,7 @@
 
 Updated list
 
-1.  
+1.  scaling_plot.jl = plotting of a few different sequence of data for comparison
 
 2. LOS.jl = reading in a N x M tabulated matrix from a file and overplotting different columns
 
