@@ -1,6 +1,7 @@
-A few tips to start programming in Julia
+A few tips to start programming in Julia by F.Vazza
 (caveat: this was written for Julia v0.6 – some differences going to v1.0 may apply)
 
+To Dow
 
 	Download source code:
 https://julialang.org/downloads/
