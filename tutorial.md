@@ -1,7 +1,7 @@
 A few tips to start programming in Julia by F.Vazza
 (caveat: this was written for Julia v0.6 – some differences going to v1.0 may apply)
 
-To Download source code: 
+#To Download source code: 
 
 https://julialang.org/downloads/
 https://docs.julialang.org/en/v1/index.html → new 1.0 version
@@ -20,7 +20,7 @@ Inside the julia command line, one can write simple programs of multiple lines w
 					OR
 julia> include(path/”script.jl”) to run script.jl within Julia shell.
 
-TROUBLES WITH PACKAGES
+#TROUBLES WITH PACKAGES
 1) Sometimes, when the installation of Julia (or of its packages) goes wrong because of internet glitches or other (the available memory on the destination system is over or else) it is necesary to clean up Julia's cache, which is usually well hidden...
 In these cases, one should do
 rm -rf ~/.julia/.cache/Plots
@@ -36,7 +36,7 @@ run Pkg.resolve() in julia
 
 
 
-Help while coding:
+#Help while coding:
 Within the shell, at any time one can type
 
 julia>   ?<command>   -> help from the command line
@@ -48,7 +48,7 @@ e.g. sq \tab -> suggests sqrt    sqrtm    squeeze  etc
 
 	Syntax miscellanea (just stuff I found useful for first tests/debugging)
 
-Legal/illegal statements:
+#Legal/illegal statements:
 
 	x=1
 	print(x)
@@ -69,7 +69,7 @@ Exiting
 quit or exit() will stop the execution but also exit Julia's shell.
 
 
-ARRAYS/VECTORS
+#ARRAYS/VECTORS
 
 1-N ordering (not 0,N-1 as in C, IDL)
 Entries stored in Fortran (column-major) ordering
@@ -146,7 +146,7 @@ DO LOOPS
 	 print(" ",value)
 
   	end
-# the above will print 1,2,3,4,5,6  because the list is made of  elements.
+the above will print 1,2,3,4,5,6  because the list is made of  elements.
 		#Notice that 
 		value=0 
 		for i in list
@@ -157,12 +157,12 @@ DO LOOPS
 
 for idx in eachindex(d)  #if d is an array (even multi-dimensional) this give an easy way of looping over its elements 
 
-FUNCTIONS
+#FUNCTIONS
 
 	Typing the initial letters of a function in the command line will show possible alternatives and syntax. Also ?function_name will open a tutorial
 
 
-PACKAGES
+#PACKAGES
 Any available package is downloaded from the command like like
         	
 		Pkg.add(“namepackage”) to install a package from the command line
@@ -187,7 +187,7 @@ Very useful packages for our stuff:
   
   	Pkg.clone(“https://github.com/blabla.jl.git”)
 
-PLOTTING
+#PLOTTING
 	
 	Pkg.add(“Winston”)   #very basic stuff
 	
@@ -203,9 +203,9 @@ see https://github.com/JuliaGraphics/Winston.jl
     
     	Pkg.add(“ImageView”)  #image filtering/manipulation
 
-PARALLEL
+#PARALLEL
 
-MAKING IT FASTER
+#OPTIMIZING AND MAKING IT FASTER
 See useful guides here
 http://www.stochasticlifestyle.com/7-julia-gotchas-handle/
 http://www.stochasticlifestyle.com/optimizing-julia-performance-practical-example/
