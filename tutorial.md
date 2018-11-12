@@ -1,9 +1,8 @@
 A few tips to start programming in Julia by F.Vazza
 (caveat: this was written for Julia v0.6 – some differences going to v1.0 may apply)
 
-To Dow
+To Download source code: 
 
-	Download source code:
 https://julialang.org/downloads/
 https://docs.julialang.org/en/v1/index.html → new 1.0 version
 
@@ -36,22 +35,27 @@ run Pkg.resolve() in julia
 *copy the old package folder to the new directory only works for some packages.
 
 
-	Help while coding:
+
+Help while coding:
 Within the shell, at any time one can type
+
 julia>   ?<command>   -> help from the command line
+
 also typing <comm and then TAB will suggest possible completions
+
 e.g. sq \tab -> suggests sqrt    sqrtm    squeeze  etc
 
 
 	Syntax miscellanea (just stuff I found useful for first tests/debugging)
 
 Legal/illegal statements:
- x=1
- print(x)
- print(2x) -> 2  legal!
- print(x2) -> error
- print(xcos(x)) -> not legal
- print((x)cos(x)) -> legal !
+
+	x=1
+	print(x)
+ 	print(2x) -> 2  legal!
+	print(x2) -> error
+ 	print(xcos(x)) -> not legal
+ 	print((x)cos(x)) -> legal !
 
 Comments with #
 
@@ -70,75 +74,78 @@ ARRAYS/VECTORS
 1-N ordering (not 0,N-1 as in C, IDL)
 Entries stored in Fortran (column-major) ordering
 Index ranges:  start: stride:finish
-name="abcd"   #defines a string of letter 
-print(name) -> abcd
-print(name[2]) -> b
-print(name[2:3])-> bc
-print,name -> (print, "abcd")
 
-x=10.0
-print,x -> (print, 10.0)
-print,x[1] -> (print, 10.0)
-print,x[2] -> error
-print(x) -> 10.0
+	name="abcd"   #defines a string of letter 
+	print(name) -> abcd
+	print(name[2]) -> b
+	print(name[2:3])-> bc
+	print,name -> (print, "abcd")
+
+	x=10.0
+	print,x -> (print, 10.0)
+	print,x[1] -> (print, 10.0)
+	print,x[2] -> error
+	print(x) -> 10.0
 
 1-dimensional vectors (they are intialised to ~0)
-a=Vector{Float64}(10)  -> 2.38972e-314 2.38972e-314 etc..
-a=Vector{Float32}(10)  ->  0  0 etc
-a=Vector{Float16}(10)  ->fuzzy stuff which I don't understand
-a=Vector{Float32}(1:10) -> 1.0 2.0 etc
-a=Vector{Float16}(1:10) -> 1.0 2.0 etc
-a=Vector{Float64}(1:10) -> 1.0 2.0 etc
-a=Vector{Int64}(1:10) -> 1 2 etc
-a=Vector{Complex64}(10) ->  8.98138f-19+1.4013f-45im etc
-a=Vector{Complex64}(1:10) -> 1.0+0.0im  2.0+0.0im etc
+	
+	a=Vector{Float64}(10)  -> 2.38972e-314 2.38972e-314 etc..
+	a=Vector{Float32}(10)  ->  0  0 etc
+	a=Vector{Float16}(10)  ->fuzzy stuff which I don't understand
+	a=Vector{Float32}(1:10) -> 1.0 2.0 etc
+	a=Vector{Float16}(1:10) -> 1.0 2.0 etc
+	a=Vector{Float64}(1:10) -> 1.0 2.0 etc
+	a=Vector{Int64}(1:10) -> 1 2 etc
+	a=Vector{Complex64}(10) ->  8.98138f-19+1.4013f-45im etc
+	a=Vector{Complex64}(1:10) -> 1.0+0.0im  2.0+0.0im etc
 
 Arrays:
-		 a=Array{Float64}(n,n)
+
+		a=Array{Float64}(n,n)
 		a=Array{Float32}(n,n,n)
 		b=similar(a)    # creates an array with same indexing of a (but empty)
 		c=similar(a,Int) # as above, but c is of Integer type
 		
 
 Fast ways of initialising sequential arrays
-x=collect(1:5)
-print(x) -> 1 2 3 4 5   [Integer]
-x=collect(1.5:5.5) -> 1.5 2.5 etc [Float64]
+	x=collect(1:5)
+	print(x) -> 1 2 3 4 5   [Integer]
+	x=collect(1.5:5.5) -> 1.5 2.5 etc [Float64]
 
-x=collect(1.1:0.1:2)
-print(x) -> 1.1  1.2  1.3  1.4 etc.   [MIDDLE NUMBER SPECIFIES INCREMENT - otherwise 1 by default]
+	x=collect(1.1:0.1:2)
+	print(x) -> 1.1  1.2  1.3  1.4 etc.   [MIDDLE NUMBER SPECIFIES INCREMENT - otherwise 1 by default]
 
-x=[sqrt(2*i) for i=1:10]  -> 1.41421  2.0  2.44949 ... 4.472
-x=[i+sqrt(j) for i=1:3, j=1:2] -> 3 x 2 Array{Float64,2}
+	x=[sqrt(2*i) for i=1:10]  -> 1.41421  2.0  2.44949 ... 4.472
+	x=[i+sqrt(j) for i=1:3, j=1:2] -> 3 x 2 Array{Float64,2}
 
-x=zeros(n,n,n)   #zero valued nxnxn array
-x=ones(n,n,n)    #1-valued
-x=rand(n,n,n)    #random values
+	x=zeros(n,n,n)   #zero valued nxnxn array
+	x=ones(n,n,n)    #1-valued
+	x=rand(n,n,n)    #random values
 
 
 IF construct
 
-if (value < 5)
-value=10
-else
-value=20
-end
+	if (value < 5)
+	value=10
+	else
+	value=20
+	end
 
 DO LOOPS
 
-value=0
- for i in 1:10
-       value+=1
-       print(" ",value)
-       end
+	value=0
+	 for i in 1:10
+       	value+=1
+       	print(" ",value)
+       	end
 
-list=[1,2,3,4,10,3]
-value=0
-for i in list
-  value+=1
-  print(" ",value)
+	list=[1,2,3,4,10,3]
+	value=0
+	for i in list
+	 value+=1
+	 print(" ",value)
 
-end
+  	end
 # the above will print 1,2,3,4,5,6  because the list is made of  elements.
 		#Notice that 
 		value=0 
@@ -156,28 +163,45 @@ FUNCTIONS
 
 
 PACKAGES
-	Any available package is downloaded from the command like like
-           Pkg.add(“namepackage”) to install a package from the command line
-	 Pkg.status()   to check what is currently installed
-	Pkg.update()   updates
+Any available package is downloaded from the command like like
+        	
+		Pkg.add(“namepackage”) to install a package from the command line
+  		
+		Pkg.status()   to check what is currently installed
 
-	Very useful packages for our stuff:
- Pkg.add("HDF5")  #support for HDF5 reading/writing
- Pkg.add("FITSIO") #support for FITS reading/writing
- Pkg.add(“Optim”)  #optimisation of code
- Pkg.add(“Devectorize”) #devectorisation for speedup
- Pkg.add(“DistributedArrays”) #domain decomposition for parallel
+		Pkg.update()   updates
 
+Very useful packages for our stuff:
+	
+	Pkg.add("HDF5")  #support for HDF5 reading/writing
 
+	Pkg.add("FITSIO") #support for FITS reading/writing
+
+	Pkg.add(“Optim”)  #optimisation of code
+
+	Pkg.add(“Devectorize”) #devectorisation for speedup
+
+	Pkg.add(“DistributedArrays”) #domain decomposition for parallel
+
+  If a package is not in the “official” Julia distribution (i.e. Some package developed by someone) 
+  
+  	Pkg.clone(“https://github.com/blabla.jl.git”)
 
 PLOTTING
+	
 	Pkg.add(“Winston”)   #very basic stuff
+	
 	using Winston
-    → https://github.com/JuliaGraphics/Winston.jl
+
+see https://github.com/JuliaGraphics/Winston.jl
+
 	Pkg.add(“PyPlot”)    #very sophisticated stuff
+
 	using PyPlot
-    → https://github.com/JuliaPy/PyPlot.jl
-    Pkg.add(“ImageView”)  #image filtering/manipulation
+ 
+ see https://github.com/JuliaPy/PyPlot.jl
+    
+    	Pkg.add(“ImageView”)  #image filtering/manipulation
 
 PARALLEL
 
@@ -187,7 +211,7 @@ http://www.stochasticlifestyle.com/7-julia-gotchas-handle/
 http://www.stochasticlifestyle.com/optimizing-julia-performance-practical-example/
 http://www.exegetic.biz/blog/2015/10/monthofjulia-day-37-fourier-techniques/ 
 
-	General rules (might be subject to revision with experience...)
+General rules (might be subject to revision with experience...)
 when possible, wrap the code into functions → this allows the compiler to know where the types cannot change and to best speed up.
 be consistent with the type of variables throughout the code; never implicitly change from integer to float or else → this would speed up the code 10-fold;
 find “type instabilities” with @code_warntype in front of  the call of your function (this works only if your function is “small enough” for Julia to anlayze). Example:   @code_warntype div(vx,vy,vz)...
@@ -195,7 +219,11 @@ declare all possible variables as constant → huge speedup
 pay attention to how equations are computed.  
 Don't vectorise (unlike many other languages). Well written loops are much faster.
 Use the broadcast “.” syntax → x .= x .+ f.(x) is much faster than x=x+f.(x) [f is a function and x a vector], although they do the same thing, because the first equates ot a element by element loop.
-Use Optim/Devectorize packages
+
+	Use Optim
+	
+	Use Devectorize  
+
 put @inbounds in front of loops where you are sure all indices are not exceeding the limits → it makes the compiler skipping this check;
 use @simd before (indipendent) loops, @fastmath in front of operations
 don't use temporary arrays
