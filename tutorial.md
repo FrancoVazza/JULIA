@@ -1,7 +1,7 @@
 A few tips to start programming in Julia by F.Vazza
 (caveat: this was written for Julia v0.6 – some differences going to v1.0 may apply)
 
-#To Download source code: 
+# DOWNLOADING JULIA
 
 https://julialang.org/downloads/
 https://docs.julialang.org/en/v1/index.html → new 1.0 version
@@ -20,7 +20,7 @@ Inside the julia command line, one can write simple programs of multiple lines w
 					OR
 julia> include(path/”script.jl”) to run script.jl within Julia shell.
 
-#TROUBLES WITH PACKAGES
+# TROUBLES WITH PACKAGES
 1) Sometimes, when the installation of Julia (or of its packages) goes wrong because of internet glitches or other (the available memory on the destination system is over or else) it is necesary to clean up Julia's cache, which is usually well hidden...
 In these cases, one should do
 rm -rf ~/.julia/.cache/Plots
@@ -36,7 +36,7 @@ run Pkg.resolve() in julia
 
 
 
-#Help while coding:
+# Help while coding:
 Within the shell, at any time one can type
 
 julia>   ?<command>   -> help from the command line
@@ -46,9 +46,9 @@ also typing <comm and then TAB will suggest possible completions
 e.g. sq \tab -> suggests sqrt    sqrtm    squeeze  etc
 
 
-	Syntax miscellanea (just stuff I found useful for first tests/debugging)
+# Syntax miscellanea (just stuff I found useful for first tests/debugging)
 
-#Legal/illegal statements:
+## Legal/illegal statements:
 
 	x=1
 	print(x)
@@ -69,7 +69,7 @@ Exiting
 quit or exit() will stop the execution but also exit Julia's shell.
 
 
-#ARRAYS/VECTORS
+## ARRAYS/VECTORS
 
 1-N ordering (not 0,N-1 as in C, IDL)
 Entries stored in Fortran (column-major) ordering
@@ -157,12 +157,12 @@ the above will print 1,2,3,4,5,6  because the list is made of  elements.
 
 for idx in eachindex(d)  #if d is an array (even multi-dimensional) this give an easy way of looping over its elements 
 
-#FUNCTIONS
+## FUNCTIONS
 
 	Typing the initial letters of a function in the command line will show possible alternatives and syntax. Also ?function_name will open a tutorial
 
 
-#PACKAGES
+## PACKAGES
 Any available package is downloaded from the command like like
         	
 		Pkg.add(“namepackage”) to install a package from the command line
@@ -187,7 +187,7 @@ Very useful packages for our stuff:
   
   	Pkg.clone(“https://github.com/blabla.jl.git”)
 
-#PLOTTING
+# PLOTTING
 	
 	Pkg.add(“Winston”)   #very basic stuff
 	
@@ -203,28 +203,37 @@ see https://github.com/JuliaGraphics/Winston.jl
     
     	Pkg.add(“ImageView”)  #image filtering/manipulation
 
-#PARALLEL
+# GOING PARALLEL
 
-#OPTIMIZING AND MAKING IT FASTER
+ (missing - based on DistributedArrays)
+ 
+ 
+# OPTIMIZING AND MAKING IT FASTER
+
 See useful guides here
 http://www.stochasticlifestyle.com/7-julia-gotchas-handle/
 http://www.stochasticlifestyle.com/optimizing-julia-performance-practical-example/
 http://www.exegetic.biz/blog/2015/10/monthofjulia-day-37-fourier-techniques/ 
 
+The key step to optimize is to time your code! 
+ - place multiple tic() and toc() in your code
+ - use @time to time simple functions
+
 General rules (might be subject to revision with experience...)
-when possible, wrap the code into functions → this allows the compiler to know where the types cannot change and to best speed up.
-be consistent with the type of variables throughout the code; never implicitly change from integer to float or else → this would speed up the code 10-fold;
-find “type instabilities” with @code_warntype in front of  the call of your function (this works only if your function is “small enough” for Julia to anlayze). Example:   @code_warntype div(vx,vy,vz)...
-declare all possible variables as constant → huge speedup
-pay attention to how equations are computed.  
-Don't vectorise (unlike many other languages). Well written loops are much faster.
-Use the broadcast “.” syntax → x .= x .+ f.(x) is much faster than x=x+f.(x) [f is a function and x a vector], although they do the same thing, because the first equates ot a element by element loop.
+-when possible, wrap the code into functions → this allows the compiler to know where the types cannot change and to best speed up.
+-be consistent with the type of variables throughout the code; never implicitly change from integer to float or else → this would speed up the code 10-fold;
+-avoid and find “type instabilities” with @code_warntype in front of  the call of your function (this works only if your function is “small enough” for Julia to anlayze). Example:   @code_warntype div(vx,vy,vz)...
+-declare all possible variables as constant → huge speedup
+-pay attention to how equations are computed.  
+-Don't vectorise (unlike many other languages). Well written loops are much faster.
+-Use the broadcast “.” syntax → x .= x .+ f.(x) is much faster than x=x+f.(x) [f is a function and x a vector], although they do the same thing, because the first equates ot a element by element loop.
 
-	Use Optim
+-	Use Optim   (at least try to see if any speedup occurs)
 	
-	Use Devectorize  
+-	Use Devectorize  (at least try to see if any speedup occurs)
 
-put @inbounds in front of loops where you are sure all indices are not exceeding the limits → it makes the compiler skipping this check;
-use @simd before (indipendent) loops, @fastmath in front of operations
-don't use temporary arrays
+- place @inbounds in front of loops where you are sure all indices are not exceeding the limits → it makes the compiler skipping this check;
+- use @simd before (indipendent) loops, 
+- use @fastmath in front of operations (but always check for mathematical consistenty of results as this involves approximations) 
+- don't use temporary arrays
 
