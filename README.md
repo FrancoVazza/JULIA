@@ -1,6 +1,8 @@
 # JULIA
 (Growing) collection of programs coded in Julia, for postprocessing of grid (mostly Enzo) data
 
+See also https://github.com/MatteoAngelinelli repository for Julia routines to analyse our Enzo simulations. 
+
 Updated list
 
 1.  scaling_plot.jl = plotting of a few different sequence of data for comparison
