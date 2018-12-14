@@ -17,6 +17,8 @@ Updated list
 
 6. map_simple.jl = map  of cubic grid data with uniform resolution, written in hdf5. Works in serial, Necessary packages:  HDF5, FITSIO, PyPlot
 
+7. rotate.jl = routine to rotate 3D vector arrays (using Rotations,  CoordinateTransformations and StaticArrays)
+
 ROUTINES STILL UNDER DEVELOPMENT:
 
 a. tracers_spectra_work.jl = injection & advection of tracer particles in Enzo dataset + Fokker-Planck routines to evolve spectra of relativistic particles
