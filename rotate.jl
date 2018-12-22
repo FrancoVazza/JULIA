@@ -26,7 +26,7 @@ using Rotations
 
 ang1=0.0
 ang2=0.0
-ang3=-π/2.*70./90.
+ang3=-π/2.*45/90.   #...multiply by a*something here to change ang3 in the loop. 
  rot=LinearMap(RotX(ang3))
  x = SVector(100, 100, 100)
  rot_around_x = recenter(rot, x)
@@ -90,10 +90,11 @@ mapx[:]=0.
 
 file_out=string(fold,"RMx_test2.fits")
 
+
 f = FITS(file_out, "w");
   write(f,mapx)
 close(f)
-
+#end    #uncomment this for the movie-making
     error()
 file_out=string(fold,"RMz_test2.fits")
 f = FITS(file_out, "w");
