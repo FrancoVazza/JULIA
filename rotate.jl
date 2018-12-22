@@ -1,9 +1,9 @@
 
 fold="/Users/francovazza/Desktop/data/DATA/CHRONOS/new_clusters/E18B/snap/"
 
- file1="Xray400_0.5-2keV.fits"
- file2="Xray400_0.5-2keV.fits"
- file3="Xray400_0.5-2keV.fits"
+ file1="Bx.fits"  #input files
+ file2="By.fits"
+ file3="Bz.fits"
 
  
 using FITSIO
@@ -12,7 +12,7 @@ using FITSIO
  fbx=FITS(string(fold,file1),"r")
  fby=FITS(string(fold,file2),"r")
  fbz=FITS(string(fold,file3),"r")
-  bx=read(fbx[1],100:299,100:299,100:299)
+  bx=read(fbx[1],100:299,100:299,100:299)    #focus on some innermost region
   by=read(fby[1],100:299,100:299,100:299)
   bz=read(fbz[1],100:299,100:299,100:299)
 
@@ -22,7 +22,7 @@ using FITSIO
 using CoordinateTransformations
 using StaticArrays
 using Rotations
-#for aa in 1:50
+#for aa in 1:50    #...to produce movies
 
 ang1=0.0
 ang2=0.0
@@ -36,8 +36,6 @@ ang3=-π/2.*70./90.
   @simd for i in 1:n
   @inbounds       p3=[bx[i,j,l],by[i,j,l],bz[i,j,l]]
                   x3=[i,j,l]
-#       pnew=rot(p3)
-#       xnew=rot(x3)
   
         pnew=rot(p3)
         xnew=rot_around_x(x3)   
@@ -72,7 +70,7 @@ if x3 > n
   by=nothing
   bz=nothing
 
-  
+  #...maps of field along the LOS 
  mapx=Array{Float64}(n,n)
  mapy=Array{Float64}(n,n)
  mapz=Array{Float64}(n,n)
@@ -90,7 +88,7 @@ mapx[:]=0.
   end
 
 
-file_out=string(fold,"Xray_test2.fits")
+file_out=string(fold,"RMx_test2.fits")
 
 f = FITS(file_out, "w");
   write(f,mapx)
@@ -108,7 +106,7 @@ f = FITS(file_out, "w");
 close(f)
 
 error()
-
+#...this is to write out the rotated 3D fileds as fits files.
 file_out1=string(fold,"Bx_rot_test.fits")
 file_out2=string(fold,"By_rot_test.fits")
 file_out3=string(fold,"Bz_rot_test.fits")
