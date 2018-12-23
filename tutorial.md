@@ -237,3 +237,10 @@ General rules (might be subject to revision with experience...)
 - use @fastmath in front of operations (but always check for mathematical consistenty of results as this involves approximations) 
 - don't use temporary arrays
 
+
+ 
+# SWITCH TO JULIA v1.0
+
+To add Packages: we now enter the "Pkg REPL" by doing
+- ]
+- add HDF5   etc
