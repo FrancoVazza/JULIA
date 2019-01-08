@@ -1,3 +1,6 @@
+#...this script reads in a set of ~large cubic data at uniform resolution (e.g. B-field components) and written in .fits files, 
+#...and rotates them of an arbitrary combination of angles, so that the resulting rotated cubes have the new 3D-components projected
+#...along the rotate axes and/or the projected maps show the projection of the rotated vectors along the rotated coordinates. 
 
 fold="/Users/francovazza/Desktop/data/DATA/CHRONOS/new_clusters/E18B/snap/"
 
@@ -22,13 +25,13 @@ using FITSIO
 using CoordinateTransformations
 using StaticArrays
 using Rotations
-#for aa in 1:50    #...to produce movies
+#for aa in 1:50    #...uncomment this to produce movies
 
 ang1=0.0
 ang2=0.0
 ang3=-π/2.*45/90.   #...multiply by a*something here to change ang3 in the loop. 
  rot=LinearMap(RotX(ang3))
- x = SVector(100, 100, 100)
+ x = SVector(200, 200, 200) #..for a 400^3 box
  rot_around_x = recenter(rot, x)
   n=200
   for l in 1:n
