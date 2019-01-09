@@ -202,10 +202,16 @@ see https://github.com/JuliaGraphics/Winston.jl
  see https://github.com/JuliaPy/PyPlot.jl
     
     	Pkg.add(“ImageView”)  #image filtering/manipulation
-
+	
+# SYNTAX HIGHLIGHTING
+	in the .emacs file in the  home directory add
+       add-to-list 'load-path"/Users/francovazza/Downloads/julia-emacs-master/")
+    (require 'julia-mode)
+where the julia-emacs master can be downloaded here https://github.com/JuliaEditorSupport/julia-emacs
+	
 # GOING PARALLEL
 
- (missing - based on DistributedArrays)
+ (missing - based on DistributedArrays  -> ***unluckily, not supported in versions >0.6, so I will have to change this)
  
  
 # OPTIMIZING AND MAKING IT FASTER
@@ -228,14 +234,15 @@ General rules (might be subject to revision with experience...)
 -Don't vectorise (unlike many other languages). Well written loops are much faster.
 -Use the broadcast “.” syntax → x .= x .+ f.(x) is much faster than x=x+f.(x) [f is a function and x a vector], although they do the same thing, because the first equates ot a element by element loop.
 
--	Use Optim   (at least try to see if any speedup occurs)
+-	Use Optim   (at least try to see if any speedup occurs - it doesn't always)
 	
--	Use Devectorize  (at least try to see if any speedup occurs)
+-	Use Devectorize  (at least try to see if any speedup occurs - it doesn't always)
 
 - place @inbounds in front of loops where you are sure all indices are not exceeding the limits → it makes the compiler skipping this check;
 - use @simd before (indipendent) loops, 
 - use @fastmath in front of operations (but always check for mathematical consistenty of results as this involves approximations) 
-- don't use temporary arrays
+- use @views to work with slices or chunks of data, i.e. data[:,:,i] = data[:,:,i]+...
+- limit the usage and creation of temporary arrays
 
 
  
