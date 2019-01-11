@@ -20,20 +20,6 @@ Inside the julia command line, one can write simple programs of multiple lines w
 					OR
 julia> include(path/”script.jl”) to run script.jl within Julia shell.
 
-# TROUBLES WITH PACKAGES
-1) Sometimes, when the installation of Julia (or of its packages) goes wrong because of internet glitches or other (the available memory on the destination system is over or else) it is necesary to clean up Julia's cache, which is usually well hidden...
-In these cases, one should do
-rm -rf ~/.julia/.cache/Plots
-rm ~/.julia/lib/v0.4/Plots.ji
-(or similar, after having located the installed version and packages in the cache giving problems)
-
-2) one can change julia's package directory by following these steps:
-run export JULIA_PKGDIR=/your/directory in shell(or manually add a new environment variable JULIA_PKGDIR on windows)
-run Pkg.init() in julia to initialize a new package system
-copy REQUIRE from old directory to the new one
-run Pkg.resolve() in julia
-*copy the old package folder to the new directory only works for some packages.
-
 
 
 # Help while coding:
@@ -171,6 +157,8 @@ Any available package is downloaded from the command like like
 
 		Pkg.update()   updates
 
+		Pkg.rm("namepackage")  to remove
+
 Very useful packages for our stuff:
 	
 	Pkg.add("HDF5")  #support for HDF5 reading/writing
@@ -186,6 +174,34 @@ Very useful packages for our stuff:
   If a package is not in the “official” Julia distribution (i.e. Some package developed by someone) 
   
   	Pkg.clone(“https://github.com/blabla.jl.git”)
+	
+# TROUBLES WITH PACKAGES
+1) Sometimes, when the installation of Julia (or of its packages) goes wrong because of internet glitches or other (the available memory on the destination system is over or else) it is necesary to clean up Julia's cache, which is usually well hidden...
+In these cases, one should do
+
+	rm -rf ~/.julia/.cache/Plots
+
+	rm ~/.julia/lib/v0.4/Plots.ji
+
+(or similar, after having located the installed version and packages in the cache giving problems)
+
+2) one can change julia's package directory by following these steps:
+run 
+
+	export JULIA_PKGDIR=/your/directory 
+
+in shell(or manually add a new environment variable JULIA_PKGDIR on windows)
+
+run 
+
+	Pkg.init() in julia to initialize a new package system
+copy  REQUIRE from old directory to the new one
+run 
+	Pkg.resolve() in julia
+
+*copy the old package folder to the new directory only works for some packages.
+
+
 
 # PLOTTING
 	
