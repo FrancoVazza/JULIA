@@ -1,0 +1,12 @@
+This is a (work in progress) sort of universal macro that does multiple map making in Julia of ENZO simulations, for the moment:
+
+- projected field quantities
+- synchrotron radio emission from shocks
+- HI emission 
+
+It can run 
+- in serial, by cutting the volume into multiple HDF5 blocks;
+- in parallel, by distributing the map making to different cores;
+- in mixed parallel way (suitable for very large runs), by distributing tasks to different cores and allowing each of them to cut the volume in multiple HDF5 blocks.
+
+
