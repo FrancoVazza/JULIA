@@ -221,7 +221,7 @@ see https://github.com/JuliaGraphics/Winston.jl
 	
 # SYNTAX HIGHLIGHTING
 	in the .emacs file in the  home directory add
-       add-to-list 'load-path"/Users/francovazza/Downloads/julia-emacs-master/")
+       (add-to-list 'load-path "/Users/francovazza/Downloads/julia-emacs-master/")
     (require 'julia-mode)
 where the julia-emacs master can be downloaded here https://github.com/JuliaEditorSupport/julia-emacs
 	
