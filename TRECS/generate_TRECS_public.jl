@@ -72,6 +72,7 @@ ib=1
  z0=Array{Float64}(1)
  logm0=Array{Float64}(1)
  nbig0=0
+#.....MAIN LOOP OVER REDSHIFT BINS
 for ii in 1:nt-1 
 
 file_gal=string(root,"cone_5x5_z",zz[ii],"txt.dat")
@@ -173,10 +174,13 @@ end
     leap=4
     end
 
+  
      @inbounds  for i in 1:leap:ngg[1]   #....loop over the (augmeted by replication, or not) galaxy distribution 
      
-        if x[i]>=x1 && x[i]<=x2 && y[i]>=y1 && y[i]<=y2 #&& logm[i]<=15.
+        if x[i]>=x1 && x[i]<=x2 && y[i]>=y1 && y[i]<=y2 
         ngal+=1
+      
+      #....the following is the attempt of fixing the overaboundance of >1e14 halos in my input catalog, compared to TRECS, by introducing an ad-hoc exponential cut.
          if logm[i] > 14.
           bor=rand(1)
          logm[i]= logm[i]*1./(1.+exp(-5*bor[1]))
