@@ -172,8 +172,9 @@ Very useful packages for our stuff:
 	Pkg.add(“DistributedArrays”) #domain decomposition for parallel
 
   If a package is not in the “official” Julia distribution (i.e. Some package developed by someone) 
-  
+        Examples:
   	Pkg.clone(“https://github.com/blabla.jl.git”)
+	Pkg.clone("https://github.com/JuliaStdlibs/Random.jl")
 	
 # TROUBLES WITH PACKAGES
 1) Sometimes, when the installation of Julia (or of its packages) goes wrong because of internet glitches or other (the available memory on the destination system is over or else) it is necesary to clean up Julia's cache, which is usually well hidden...
