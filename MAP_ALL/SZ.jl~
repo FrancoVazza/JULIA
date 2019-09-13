@@ -1,0 +1,32 @@
+###########################################################
+##### main caller of X-ray emissivity functions
+##....
+
+@everywhere function SZ(d::Array{Float64,3},t::Array{Float64,3},Y_dec::Array{Float64,3},freq::Float64) 
+
+
+ n3=size(d)
+ y_dec[:]=0.
+
+kb=1.38d-16
+cmtoMpc=3.08e24
+tcmb=2.73d0
+tcmb*=(1+zed)                     # temperature of the CMB
+vc= 29979245800.0               # speed of light
+emass=9.109d-28                 # electron mass
+sigmat=0.665d-24                # Thomson cross-section in cm^2
+
+
+temp=tlos                       
+nth=dlos                        
+
+dec=log10(4.)+2*log10(kb)
+dec+=log10(tcmb*tlos)+log10(sigmat)-log10(emass*vc^2.)+2.*log10(freq/float(vc))
+dec+=log10(cell)+log10(cmtoMpc)+26.d0
+
+Y_dec=10.d0^dec*sum(nth,3)*(cell^2.)
+
+return Y_dec
+
+end
+ 

@@ -8,3 +8,10 @@
 @everywhere const vc=299792458e2 #...cm/S
 @everywhere const gamma=1.66667  #..adiabatic index
 @everywhere const fac=gamma*kb/mp
+@everywhere const keV=1.16e7
+@everywhere const mu=0.59
+@everywhere const cmtoMpc=3.08e24
+@everywhere const tcmb=2.73
+@everywhere const sigmat=0.665e-24
+@everywhere const msol=1.989e33
+@everywhere const Mpctocm=3.08567e24

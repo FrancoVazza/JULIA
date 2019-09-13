@@ -1,4 +1,4 @@
-const mthr=2.3   #...lower limit Mach number
+const mthr=2.0   #...lower limit Mach number
 
 ##############################################################################################
 #...HISTOGRAM CALCULATION, IF NEEDED
@@ -18,8 +18,8 @@ end
 
 #######################################################################################
  #....3D DIVERGENCE OF VELOCITY FIELD
- @everywhere function div_compute(vx::Array{Float64,3},vy::Array{Float64,3},vz::Array{Float64,3},t::Array{Float64,3},n3::Tuple{Int64,Int64,Int64}) 
-    Tmin=1e5
+ @everywhere function div_compute(vx::Array{Float64,3},vy::Array{Float64,3},vz::Array{Float64,3},n3::Tuple{Int64,Int64,Int64}) 
+
     div=fill(0.0,n3[1],n3[2],n3[3])
     for l in 2:n3[3]-1
     for j in 2:n3[2]-1 
@@ -77,11 +77,7 @@ end
     end
 
 
-@inbounds     @simd for i in eachindex(t)
-    if t[i]<=Tmin
-    div[i]=0.
-    end
-    end
+
      
      
   return div        
@@ -370,10 +366,9 @@ end
 
 #   local mach=similar(macx) #   mach=fill(0.0,n3[1],n3[2],n3[3])   
    
-    div=div_compute(vx,vy,vz,t,n3)   #computes 3D divergence 
-    #id2=find(x-> (x <= 0.04),d)  # && isnan.(im1)==false && im1>=0),d)
+    div=div_compute(vx,vy,vz,n3)   #computes 3D divergence 
    
-    tag=find(x->(x <-1e2), div)# && (x->(x>=Tmin),t))  #selection of negative divergence cells
+    tag=find( x->(x <= -0.), div)  #selection of negative divergence cells
     nshock=size(tag)
    
     ijk=ind2sub((n3[1],n3[2],n3[3]),tag)
