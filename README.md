@@ -19,8 +19,15 @@ Updated list
 
 7. rotate.jl = routine to rotate 3D vector arrays (using Rotations,  CoordinateTransformations and StaticArrays)
 
-ROUTINES STILL UNDER DEVELOPMENT:
 
-a. tracers_spectra_work.jl = injection & advection of tracer particles in Enzo dataset + Fokker-Planck routines to evolve spectra of relativistic particles
+8. tracers_spectra_work.jl = injection & advection of tracer particles in Enzo dataset + Fokker-Planck routines to evolve spectra of relativistic particles
 
-b. shocks_test.jl = shock finder for Enzo simulations
+9. shocks_test.jl = shock finder for Enzo simulations
+
+LARGER PROGRAMS (work in progress):
+
+-MAPS_ALL : map making for ENZO unigrid simulation, using DistributedArrays(requires Julia v0.6), including shock-finding and computing X-ray emission, Sunyaev Zeldovich, HI, synchrotron and Faraday Rotation).
+-TRECS : production of galaxy catalog from large simulation, in order to cope with the TRECS algorithm to produce SKA-like surveys (Bonaldi et al. 2017).
+- FP_Julia : Fokker Planck evolution of relativistic particle spectra in Julia, for passive tracer particles.
+- Tristan : analysis routines for Tristan-MP simulations
+- INFORMATION : routines to compute statistical complexity in ENZO simulations. 
