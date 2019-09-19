@@ -7,8 +7,8 @@
      m2=m*m
     @fastmath fm1=(m2+3.)/(4.*m2)
     @fastmath fm2= (16.*m2)/((5.*m2-1.)*(m2+3.))
-        d1=d*fm1   #..pre-shock density
-        t1=t*fm2   #..pre-shock temperature
+        d1=d   #..post-shock density
+        t1=t  #..post-shock temperature
         bf=sqrt(bx^2.+by^2.+bz^2.)*1e6       
         s=2.*(m2+1.)/(m2-1.)  #...injection spectral index                                         
     xsi=1e-2*psi#_sel(m,t1/keV,ff,mpsi)                         
