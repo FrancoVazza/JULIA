@@ -42,7 +42,7 @@ end
 @everywhere function turb2(vx::Array{Float64,3},vy::Array{Float64,3},vz::Array{Float64,3},sigma::Array{Float64,3})
 
 n3=size(vx)
-scale=4 #..number of cells in 1D for the kernel
+scale=4 #..number of cells in 1D to compute the local dispersion 
 
 #I know it's written in an awful way, thank u
 @inbounds for l in 1:n3[3]
