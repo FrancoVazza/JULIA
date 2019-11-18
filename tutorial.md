@@ -5,6 +5,7 @@ A few tips to start programming in Julia by F.Vazza
 
 https://julialang.org/downloads/
 https://docs.julialang.org/en/v1/index.html → new 1.0 version
+https://julialang.org/downloads/oldreleases.html -> older relases (0.6.4 is used for most written here below)
 
 MAC → click on self-installing pkg
 LINUX → untar and find exec in  
