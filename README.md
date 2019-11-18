@@ -24,7 +24,7 @@ Updated list
 
 9. shocks_test.jl = shock finder for Enzo simulations
 
-LARGER PROGRAMS (work in progress):
+LARGER PROJECTS (all work in progress! ):
 
 - MAPS_ALL : map making for ENZO unigrid simulation, using DistributedArrays(requires Julia v0.6), including shock-finding and computing X-ray emission, Sunyaev Zeldovich, HI, synchrotron and Faraday Rotation).
 - TRECS : production of galaxy catalog from large simulation, in order to cope with the TRECS algorithm to produce SKA-like surveys (Bonaldi et al. 2017).
