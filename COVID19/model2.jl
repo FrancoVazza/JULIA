@@ -11,7 +11,6 @@ Plots.GRBackend()
   #...PARAMETERS
   const  pdead=0.01  #....death probability for an infected
        pinf0=0.40    #....probability to infect another one (in a day)
-      #  R0=pinf0*t_incub  ;2.5 for Covid
        day_max=25
        t_incub=5.5
        R0=pinf0*t_incub   #...never explicitly used be, it is estimated to be 2.5 for Covid19.
