@@ -18,9 +18,9 @@ Plots.GRBackend()
        day_intervention=13  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1 )
   #...daily official data from Italian Gov.
 
-  infreal=[4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
-  deadreal=[197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
-  dreal=   [15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
+  infreal=[5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
+  deadreal=[233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
+  dreal=   [16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 feb = day1
 
 @inbounds     for ss in 0:1  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
 
