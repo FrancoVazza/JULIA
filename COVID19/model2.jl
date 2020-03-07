@@ -11,18 +11,18 @@ Plots.GRBackend()
   #...PARAMETERS
   const  pdead=0.01  #....death probability for an infected
        pinf0=0.40    #....probability to infect another one (in a day)
-       day_max=25
+       day_max=23
        t_incub=5.5
        R0=pinf0*t_incub   #...never explicitly used be, it is estimated to be 2.5 for Covid19.
-       nm=8          #...number of random realisation
-       day_intervention=8  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1 )
+       nm=8       #...number of random realisation
+       day_intervention=13  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1 )
   #...daily official data from Italian Gov.
 
-  infreal=[3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
-  deadreal=[148,107,79,52,34,29,21,17,12,10,7,3,2,1]
-  dreal=   [14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
+  infreal=[4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
+  deadreal=[197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
+  dreal=   [15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
 
-@inbounds     for ss in 0:0  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
+@inbounds     for ss in 0:1  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
 
   model = Array{Float64}(undef, nm,day_max,3)   #....array with global statistics for each model
 
@@ -45,15 +45,26 @@ Plots.GRBackend()
     @inbounds for dd in 1:day_max    #...loop over days
 
     if ss==1 &&  dd >= day_intervention   #....in scenario ss=1, we can model a reduced contagion rate here
-    pinf=pinf0*0.8         #...test change of infectivity after day - just a wild guess
+    pinf=pinf0*0.5         #...test change of infectivity after day - just a wild guess
     end
     nninfo=0
 
 #loop1
+    if dd==20
+    t1=time()
+    end
     rng = MersenneTwister(mm)     #...we first generate random set of numbers for the Monte Carlo
     a=rand!(rng,zeros(n_inf0))
     tt=randn!(rng,zeros(n_inf0))
+    if dd==20
+    t2=time()
+    println("cpu time1=",t2-t1)
+    end
 
+    if dd==20
+     t1=time()
+    end
+    n_new=0
     @inbounds  @simd  for i in 1:n_inf0  #loop over people already infected on this day
     if alive[i]==1 && age[i]>=0          #...how many people are infected and alive
 
@@ -74,13 +85,8 @@ Plots.GRBackend()
      end
      end
      end
-    end   #end of loop1
 
-#loop2
-     n_new=0
-     rng = MersenneTwister(mm+1)
-     a=rand!(rng,zeros(n_inf0))
-  @inbounds  @simd  for i in 1:n_inf0     #loop to decide new number of infection
+    #...now we compute the number of new infections
      if alive[i]==1 && status[i]==0       #...identifies alive & undiagnosed patients
      if a[i] <=pinf                       #a new infection
      n_new+=1
@@ -91,7 +97,7 @@ Plots.GRBackend()
 
      end
      end
-     end #end of loop2
+ end #end of loop over infected 
 
      n_inf0+=n_new  #..updated counter of infected
 
@@ -143,7 +149,7 @@ if ss==0
         plot(day,plo,label = ["Infected (model)" "Dead(model)" "Diagnosed(model)"],color=["blue" "red" "green"],lw=5,legend=:bottomright)
 end
 if ss==1
-       plot!(day,plo,label = ["Infected (model+containment)" "Dead(model+containment)" "Diagnosed(model+containment)"],color=["blue" "red" "green"],lw=1,ls=[:dash :dash :dash])
+       plot!(day,plo,label = ["Infected (model+containment)"  "Dead(model+containment)" "Diagnosed(model+containment)"],color=["blue" "red" "green"],lw=1,ls=[:dash :dash :dash])
 end
 
 
@@ -159,7 +165,7 @@ end
 
 #    axis([1,day_max,1,1e5])
     plot!(xlabel="days",ylabel="number of people")
-    plot!(xlims=(1,day_max*1.5),ylims=(1,5e4))
+    plot!(xlims=(1,day_max*1.4),ylims=(0.1,1e5))
     yaxis!(:log10)
 
     plot!(dreal,infreal,seriestype = :scatter,color="green",label="Infected (REAL)")
@@ -167,4 +173,5 @@ end
   #  println(plo[day_max,2]," ",splo1[day_max,2]," ",splo2[day_max,2])
 
  #....scenario
-     savefig("/Users/francovazza/Desktop/Julia_prog/fig_test2.png")
+     savefig("/Users/francovazza/Desktop/Julia_prog/fig_test3.png")
+
