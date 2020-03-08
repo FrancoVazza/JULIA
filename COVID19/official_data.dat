@@ -1,0 +1,6 @@
+Taken from https://lab24.ilsole24ore.com/coronavirus/
+
+  infreal=[7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]   #cumulative number of infection
+  deadreal=[366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]                         #cumulative number of death
+  dreal=   [17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]                                #days (day 1 is 21st Feb. 2020)
+
