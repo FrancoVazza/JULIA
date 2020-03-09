@@ -9,7 +9,7 @@ Plots.GRBackend()
   root="/Users/francovazza/Desktop/"
 
   #...PARAMETERS
-  const  pdead=0.01  #....death probability for an infected
+ pdead=0.01  #....death probability for an infected
        pinf0=0.40    #....probability to infect another one (in a day)
        day_max=23
        t_incub=5.5
@@ -43,8 +43,12 @@ Plots.GRBackend()
     status[:].=0
 
     @inbounds for dd in 1:day_max    #...loop over days
-
-    if ss==1 &&  dd >= day_intervention   #....in scenario ss=1, we can model a reduced contagion rate here
+  
+    if dd >=12
+    pdead=0.015  #....increased lethality, as seems to be required by data
+    end
+   
+      if ss==1 &&  dd >= day_intervention   #....in scenario ss=1, we can model a reduced contagion rate here
     pinf=pinf0*0.5         #...test change of infectivity after day - just a wild guess
     end
     nninfo=0
