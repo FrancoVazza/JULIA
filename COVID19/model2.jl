@@ -53,21 +53,12 @@ Plots.GRBackend()
     end
     nninfo=0
 
-#loop1
-    if dd==20
-    t1=time()
-    end
+#main loop
+   
     rng = MersenneTwister(mm)     #...we first generate random set of numbers for the Monte Carlo
     a=rand!(rng,zeros(n_inf0))
     tt=randn!(rng,zeros(n_inf0))
-    if dd==20
-    t2=time()
-    println("cpu time1=",t2-t1)
-    end
-
-    if dd==20
-     t1=time()
-    end
+   
     n_new=0
     @inbounds  @simd  for i in 1:n_inf0  #loop over people already infected on this day
     if alive[i]==1 && age[i]>=0          #...how many people are infected and alive
