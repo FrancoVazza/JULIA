@@ -31,7 +31,7 @@ Plots.GRBackend()
      println("doing trial number=",mm)
      pinf=pinf0
      n_dead=0    #...initial counter of victims
-     n_inf0=400  #...initial counter of infected (day=1)
+     n_inf0=400  #...initial counter of infected (day=1). This is uknown - but it sets the overall normalisation and can be calibrated after the first few days
      n_diag=0    #...number counter of  diagnosed
 
     age=Array{Int64}(undef,n_inf0)    #...age (starting from t=1) of infection for each infected
