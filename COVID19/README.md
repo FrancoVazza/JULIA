@@ -15,7 +15,7 @@ Ref. numbers that seems to work against real data are pinf0=0.4, pdead=0.01 and 
 Main assumptions:
 
 - we assume a single large population (i.e. no clusterting in cities etc) with a single age. 
-- an initial population of **n_inf0** infected (larger than the initial number of reported cases - but to be calibrated against them). n_inf0=400 works well with data. 
+- an initial population of **n_inf0** infected (larger than the initial number of reported cases - but to be calibrated against them). n_inf0=400 works well in matching the initial normalisation of italian data. 
 - a person is only infective while its personal counter has a time < its personal incubation time (randomly drawn); after this the person is diagnosed/isolated in 100% of cases (but can still die). 
 - all infected people can infect others and will eventually develop a desease (questionable). 
 
