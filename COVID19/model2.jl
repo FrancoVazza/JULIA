@@ -19,7 +19,7 @@ Plots.GRBackend()
   #...daily official data from Italian Gov.
   infreal=[9172,7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
   deadreal=[463,366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
-  dreal=   [18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
+  dreal=   [18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 feb = day1
 
 @inbounds     for ss in 0:0  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
 
@@ -155,16 +155,11 @@ end
     plot!(day,splo2[:,3],color="green",label=nothing)#
   end
 
-#    plot(day,)
-
-#    axis([1,day_max,1,1e5])
     plot!(xlabel="days",ylabel="number of people")
     plot!(xlims=(1,day_max*1.4),ylims=(0.1,1e5))
     yaxis!(:log10)
 
     plot!(dreal,infreal,seriestype = :scatter,color="green",label="Infected (REAL)")
     plot!(dreal,deadreal,seriestype = :scatter,color="red",label="Dead(REAL)")
-  #  println(plo[day_max,2]," ",splo1[day_max,2]," ",splo2[day_max,2])
 
- #....scenario
      savefig("/Users/francovazza/Desktop/Julia_prog/fig_9march.png")
