@@ -6,23 +6,22 @@ using LaTeXStrings
 gr()
 Plots.GRBackend()
 
-  root="/Users/francovazza/Desktop/"
-
   #...PARAMETERS
- pdead=0.01  #....death probability for an infected
+       pdead=0.01  #....death probability for an infected
        pinf0=0.40    #....probability to infect another one (in a day)
-       day_max=23
+       day_max=25
        t_incub=5.5
        R0=pinf0*t_incub   #...never explicitly used be, it is estimated to be 2.5 for Covid19.
-       nm=8       #...number of random realisation
-       day_intervention=13  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1 )
+       nm=8      #...number of random realisation
+       day_intervention=14  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1) - Just a guess, since nothing happened so far
+
+
   #...daily official data from Italian Gov.
+  infreal=[9172,7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
+  deadreal=[463,366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
+  dreal=   [18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
 
-  infreal=[5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
-  deadreal=[233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
-  dreal=   [16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 feb = day1
-
-@inbounds     for ss in 0:1  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
+@inbounds     for ss in 0:0  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
 
   model = Array{Float64}(undef, nm,day_max,3)   #....array with global statistics for each model
 
@@ -41,24 +40,24 @@ Plots.GRBackend()
     alive[:].=1
     age[:].=0
     status[:].=0
-
+    pdead=0.01
     @inbounds for dd in 1:day_max    #...loop over days
-  
+
     if dd >=12
-    pdead=0.015  #....increased lethality, as seems to be required by data
+    pdead=0.015   #....ad-hoc increased lethality, as seems to be required by data since
     end
-   
-      if ss==1 &&  dd >= day_intervention   #....in scenario ss=1, we can model a reduced contagion rate here
-    pinf=pinf0*0.5         #...test change of infectivity after day - just a wild guess
+
+    if ss==1 &&  dd >= day_intervention   #....in scenario ss=1, we can model a reduced contagion rate here
+    pinf=pinf0*0.8        #...test change of infectivity after day - just a wild guess
     end
     nninfo=0
 
-#main loop
-   
+
     rng = MersenneTwister(mm)     #...we first generate random set of numbers for the Monte Carlo
     a=rand!(rng,zeros(n_inf0))
     tt=randn!(rng,zeros(n_inf0))
-   
+
+
     n_new=0
     @inbounds  @simd  for i in 1:n_inf0  #loop over people already infected on this day
     if alive[i]==1 && age[i]>=0          #...how many people are infected and alive
@@ -92,7 +91,7 @@ Plots.GRBackend()
 
      end
      end
- end #end of loop over infected 
+ end #end of loop over infected
 
      n_inf0+=n_new  #..updated counter of infected
 
@@ -168,5 +167,4 @@ end
   #  println(plo[day_max,2]," ",splo1[day_max,2]," ",splo2[day_max,2])
 
  #....scenario
-     savefig("/Users/francovazza/Desktop/Julia_prog/fig_test3.png")
-
+     savefig("/Users/francovazza/Desktop/Julia_prog/fig_9march.png")
