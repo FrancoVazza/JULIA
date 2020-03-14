@@ -6,6 +6,8 @@ using LaTeXStrings
 gr()
 Plots.GRBackend()
 
+  root="/Users/francovazza/Desktop/"
+
   #...PARAMETERS
        pdead=0.01  #....death probability for an infected
        pinf0=0.40    #....probability to infect another one (in a day)
@@ -13,13 +15,17 @@ Plots.GRBackend()
        t_incub=5.5
        R0=pinf0*t_incub   #...never explicitly used be, it is estimated to be 2.5 for Covid19.
        nm=8      #...number of random realisation
-       day_intervention=14  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1) - Just a guess, since nothing happened so far
+       day_intervention=19  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1 )
 
 
   #...daily official data from Italian Gov.
-  infreal=[9172,7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
-  deadreal=[463,366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
-  dreal=   [18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 feb = day1
+  infreal=[21157,17660,15113,12462,10149,9172,7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
+  deadreal=[1441,1266,1016,827,631,463,366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
+  dreal=   [23,22,21,20,19,18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
+
+ println(size(infreal))
+ println(size(dreal))
+  println(size(deadreal))
 
 @inbounds     for ss in 0:0  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
 
@@ -40,17 +46,22 @@ Plots.GRBackend()
     alive[:].=1
     age[:].=0
     status[:].=0
-    pdead=0.01
-    @inbounds for dd in 1:day_max    #...loop over days
 
+    @inbounds for dd in 1:day_max    #...loop over days
+    pdead=0.02
     if dd >=12
-    pdead=0.015   #....ad-hoc increased lethality, as seems to be required by data since
+    pdead=0.03   #....ad-hoc increased lethality, as seems to be required by data since
+    end
+
+    if dd >=17#
+    pdead=0.04   #....ad-hoc increased lethality, as seems to be required by data since
     end
 
     if ss==1 &&  dd >= day_intervention   #....in scenario ss=1, we can model a reduced contagion rate here
-    pinf=pinf0*0.8        #...test change of infectivity after day - just a wild guess
+    pinf=pinf0*0.2        #...test change of infectivity after day - just a wild guess
     end
     nninfo=0
+
 
 
     rng = MersenneTwister(mm)     #...we first generate random set of numbers for the Monte Carlo
@@ -59,16 +70,18 @@ Plots.GRBackend()
 
 
     n_new=0
+    t1=time()
     @inbounds  @simd  for i in 1:n_inf0  #loop over people already infected on this day
-    if alive[i]==1 && age[i]>=0          #...how many people are infected and alive
+    if alive[i]==1 && age[i]>=0         #...how many people are infected and alive
 
     @fastmath  dt=t_incub+0.5*t_incub*tt[i]   #...individual incubation time: it's  a normal distribution peaked at t_incub, with 1sigma=t_incub/2
 
-    if a[i] <=pdead #...patient is removed: the time is negative, the status is dead (0) but there likely is a diagnosis (1)
+    if a[i] <=pdead && age[i]>=dt#...patient is removed: the time is negative, the status is dead (0) but there likely is a diagnosis (1)
     age[i]=-1   #
     alive[i]=0  #dead
     status[i]=1 #diagnosed
     else
+
 
      age[i]+=1   #...patient is infected for one day
      alive[i]=1  #alive
@@ -92,10 +105,11 @@ Plots.GRBackend()
      end
      end
  end #end of loop over infected
-
+     t2=time()
      n_inf0+=n_new  #..updated counter of infected
 
    #....update daily statistics
+
    id=findall(x-> x==0,alive)
    n=size(id)
    ndead=n[1]  #....total number of casualties
@@ -108,7 +122,7 @@ Plots.GRBackend()
     n=size(id)
     ndiagnosed=n[1]  #....total number of diagnosed
 
-    println("day=",dd," ",ndead," ",n_inf0," ",ndiagnosed)
+    println("day=",dd," ",ndead," ",n_inf0," ",ndiagnosed," CPU t=",t2-t1)
     model[mm,dd,1]=ninfected
     model[mm,dd,2]=ndead
     model[mm,dd,3]=ndiagnosed
@@ -143,7 +157,7 @@ if ss==0
         plot(day,plo,label = ["Infected (model)" "Dead(model)" "Diagnosed(model)"],color=["blue" "red" "green"],lw=5,legend=:bottomright)
 end
 if ss==1
-       plot!(day,plo,label = ["Infected (model+containment)"  "Dead(model+containment)" "Diagnosed(model+containment)"],color=["blue" "red" "green"],lw=1,ls=[:dash :dash :dash])
+       plot!(day,plo,label = ["Infected (model+lockdown)"  "Dead(model+lockdown)" "Diagnosed(model+lockdown)"],color=["blue" "red" "green"],lw=1,ls=[:dash :dash :dash])
 end
 
 
@@ -155,11 +169,16 @@ end
     plot!(day,splo2[:,3],color="green",label=nothing)#
   end
 
+#    plot(day,)
+
+#    axis([1,day_max,1,1e5])
     plot!(xlabel="days",ylabel="number of people")
-    plot!(xlims=(1,day_max*1.4),ylims=(0.1,1e5))
+    plot!(xlims=(1,day_max*1.4),ylims=(1,2e5))
     yaxis!(:log10)
 
     plot!(dreal,infreal,seriestype = :scatter,color="green",label="Infected (REAL)")
     plot!(dreal,deadreal,seriestype = :scatter,color="red",label="Dead(REAL)")
+  #  println(plo[day_max,2]," ",splo1[day_max,2]," ",splo2[day_max,2])
 
-     savefig("/Users/francovazza/Desktop/Julia_prog/fig_9march.png")
+ #....scenario
+     savefig("/Users/francovazza/Desktop/Julia_prog/fig_14march.png")
