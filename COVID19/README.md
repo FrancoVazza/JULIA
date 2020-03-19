@@ -1,6 +1,6 @@
 
 
-Simplistic monte-carlo model for the spread of the COVID19 virus in Italy (starting from Feb.21st).
+Simplistic monte-carlo model (~SIR like model) for the spread of the COVID19 virus in Italy (starting from Feb.21st).
 
 The Julia code requires Julia v.1.0+ and a bunch of packages (see beginning of the macro). 
 
@@ -10,7 +10,7 @@ The model "predicts" the evolution of the number of infected, diagnosed and casu
 - **pdead**= probability that an infected person dies;
 - **t_incub** = mean incubiation period (after which one gets **always** diagnosed); assuming a gaussian distribution with FWHM t_incub/2. 
 
-Ref. numbers that seems to work against real data are pinf0=0.4, pdead=0.01 and t_incub=5.5 days 
+Ref. numbers that seems to work against real data are pinf0=0.4, pdead=0.01 and t_incub=5.5 days \pm 5 days (Wuhan early estimates)
 
 Main assumptions:
 
@@ -19,7 +19,7 @@ Main assumptions:
 - a person is only infective while its personal counter has a time < its personal incubation time (randomly drawn); after this the person is diagnosed/isolated in 100% of cases (but can still die). 
 - all infected people can infect others and will eventually develop a desease (questionable). 
 
-The model can also account for the long-term effect of an effective reduced contagion rate, by reducing pinf0 at a given day; various histories can be compared. 
+The model can also account for the long-term effect of an effective reduced contagion rate, by reducing pinf0 at a given day; various histories can be compared. This is, of course, highly speculative and cannot factor in the effects of a multi-population scenario (e.g. infection starting at different times across the country). 
 
 The model runs in a few tens of seconds to generate ~10 realization of the evolution over ~20 days, processing ~1e5 infected. 
 
