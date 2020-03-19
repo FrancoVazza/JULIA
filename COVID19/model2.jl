@@ -4,6 +4,12 @@ using Random
 using LaTeXStrings
 
 gr()
+using Statistics
+using Plots
+using Random
+using LaTeXStrings
+
+gr()
 Plots.GRBackend()
 
   root="/Users/francovazza/Desktop/"
@@ -11,23 +17,23 @@ Plots.GRBackend()
   #...PARAMETERS
        pdead=0.01  #....death probability for an infected
        pinf0=0.40    #....probability to infect another one (in a day)
-       day_max=25
+       day_max=35
        t_incub=5.5
        R0=pinf0*t_incub   #...never explicitly used be, it is estimated to be 2.5 for Covid19.
        nm=8      #...number of random realisation
-       day_intervention=19  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1 )
+       day_intervention=17  #....day at which the government takes action and the infection rate is reduced (used only in scenario ss=1 )
 
 
   #...daily official data from Italian Gov.
-  infreal=[21157,17660,15113,12462,10149,9172,7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
-  deadreal=[1441,1266,1016,827,631,463,366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
-  dreal=   [23,22,21,20,19,18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
+  infreal=[35713,31506,27980,24747,21157,17660,15113,12462,10149,9172,7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
+  deadreal=[2978,2503,2158,1809,1441,1266,1016,827,631,463,366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
+  dreal=   [27,26,25,24,23,22,21,20,19,18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
 
  println(size(infreal))
  println(size(dreal))
   println(size(deadreal))
 
-@inbounds     for ss in 0:0  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
+@inbounds     for ss in 0:1  #...loop over 2 possible scenarios 0=no intervention, 1=intervention which reduces pinf0 starting from a given day
 
   model = Array{Float64}(undef, nm,day_max,3)   #....array with global statistics for each model
 
@@ -58,7 +64,7 @@ Plots.GRBackend()
     end
 
     if ss==1 &&  dd >= day_intervention   #....in scenario ss=1, we can model a reduced contagion rate here
-    pinf=pinf0*0.2        #...test change of infectivity after day - just a wild guess
+    pinf=pinf0*0.3        #...test change of infectivity after day - just a wild guess
     end
     nninfo=0
 
@@ -154,10 +160,10 @@ Plots.GRBackend()
 
 
 if ss==0
-        plot(day,plo,label = ["Infected (model)" "Dead(model)" "Diagnosed(model)"],color=["blue" "red" "green"],lw=5,legend=:bottomright)
+        plot(day,plo,label = ["Infected (model)" "Dead(model)" "Diagnosed(model)"],color=["blue" "red" "green"],lw=1,legend=:bottomright)
 end
 if ss==1
-       plot!(day,plo,label = ["Infected (model+lockdown)"  "Dead(model+lockdown)" "Diagnosed(model+lockdown)"],color=["blue" "red" "green"],lw=1,ls=[:dash :dash :dash])
+       plot!(day,plo,label = ["Infected (model+lockdown)"  "Dead(model+lockdown)" "Diagnosed(model+lockdown)"],color=["blue" "red" "green"],lw=3,ls=[:dash :dash :dash])
 end
 
 
@@ -181,4 +187,4 @@ end
   #  println(plo[day_max,2]," ",splo1[day_max,2]," ",splo2[day_max,2])
 
  #....scenario
-     savefig("/Users/francovazza/Desktop/Julia_prog/fig_14march.png")
+     savefig("/Users/francovazza/Desktop/Julia_prog/fig_18marchB.png")
