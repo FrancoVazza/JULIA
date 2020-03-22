@@ -17,7 +17,7 @@ Plots.GRBackend()
   #...PARAMETERS
        pdead=0.01  #....death probability for an infected
        pinf0=0.40    #....probability to infect another one (in a day)
-       day_max=35
+       day_max=30
        t_incub=5.5
        R0=pinf0*t_incub   #...never explicitly used be, it is estimated to be 2.5 for Covid19.
        nm=8      #...number of random realisation
@@ -25,9 +25,9 @@ Plots.GRBackend()
 
 
   #...daily official data from Italian Gov.
-  infreal=[35713,31506,27980,24747,21157,17660,15113,12462,10149,9172,7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
-  deadreal=[2978,2503,2158,1809,1441,1266,1016,827,631,463,366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
-  dreal=   [27,26,25,24,23,22,21,20,19,18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
+  infreal=[53578,47021,41035,35713,31506,27980,24747,21157,17660,15113,12462,10149,9172,7375,5883,4636,3858,3089,2502,2036,1694,1128,888,650,400,322,229,157,79,16]
+  deadreal=[4825,4032,3405,2978,2503,2158,1809,1441,1266,1016,827,631,463,366,233,197,148,107,79,52,34,29,21,17,12,10,7,3,2,1]
+  dreal=   [30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14, 13, 12,11,10,9,8,7,6,5,4,3,2,1 ]  #21 febbraio = day1
 
  println(size(infreal))
  println(size(dreal))
