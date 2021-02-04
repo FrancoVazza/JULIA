@@ -1,1 +1,9 @@
 
+Public serial version of the cosmic ray solver (e.g. Fokker Planck without diffusion terms) used in Vazza, Wittor, Brunetti & Bruggen 2021.
+
+The code requires as input a sequence of tracers data, written in HDF5 format, and computes particle spectra f 
+
+
+- The input tracer files contain particle ID information and gas physical quantities like gas density [g/cm3], gas temeperature[K], magnetic fields strength [microGauss], 
+3D vorticity and divergence [1/s] and redshift). A file sample of 10 tracers is given in this folder.
+- The code 
