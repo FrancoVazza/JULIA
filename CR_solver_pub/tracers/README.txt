@@ -1,5 +1,6 @@
 Test sequence of particle tracers data written in HDF5 format.
-Each file represent a different evolutionary moment of 25 gas tracers, with quantities:
+Each file represent a different evolutionary epoch of 25 different gas tracers, for 50 snapshots.
+The recorded quantities:
         "Redshift"  
         "xcoord"   [kpc]
         "ycoord"   [kpc]
