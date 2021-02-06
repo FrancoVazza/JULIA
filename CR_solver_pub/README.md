@@ -8,9 +8,11 @@ The code requires as input a sequence of tracers data, written in HDF5 format (s
 
 - The main code is FP_public.jl
 
-- Additional functions and parameter settings are given in param_spectra.jl and loss_gain1.jl
+- Additional necessary functions are: 
 
-- Parameters of input spectra and momentum binning should be set in param_spectra.jl (pmin, pmax, dp).
+      param_spectra.jl  > containing  parameters of input spectra and momentum binning, which can be changed here (pmin, pmax, dp).
+
+      loss_gain1.jl   > containing all acceleration and loss terms, necessary for the Fokker-Planck evolution (Chang & Cooper 1970 - like). 
 
 - FP_public.jl generates the simultaneous evolution of the same set of electron spectra, over 50 time snapshots, for three different scenarios of cosmic ray acceleration and losses.
 
