@@ -4,6 +4,9 @@ Each file represent a different evolutionary moment of 25 gas tracers, with quan
         "xcoord"   [kpc]
         "ycoord"   [kpc]
         "zcoord"   [kpc]
+        "x-velocity"   [cm/s]
+        "y-velocity"   [cm/s]
+        "z-velocity"   [cm/s]
         "density"  [g/cm3]
         "temperature" [K]
         "mach"
