@@ -117,9 +117,9 @@
      @fastmath  ibeta=beta_inc(0.5*(deltaB-2),0.5*(3-deltaB),1/(1+p_cut^2))
      @fastmath  inteB=(erest/(delta-1))*0.5*ibeta[1]+(p_cut^(1-delta))*(sqrt(1+p_cut^2)-1)
      @fastmath  Ke= (Kep*eta*ecr)/(vpost*inteB)
-     @inbounds @simd    for j in 1:np#eachindex(n_inj)
+     @inbounds @simd    for j in 1:np
 
-       @fastmath    n_inj[j]=Ke*pval[j]^(-delta)*(1-pval[j]/p_cut)^(delta-2)  #  log10(Ke)-delta*log10(pval[j])+log10((1. -pval[j]*inv(p_cut))^(delta-2.))
+       @fastmath    n_inj[j]=Ke*pval[j]^(-delta)*(1-pval[j]/p_cut)^(delta-2) 
 
          q_inj[j]=n_inj[j]
 
@@ -184,13 +184,13 @@ end
 
 #...thermal energy
    function eth(n::Float64,volume::Float64,t::Float64)
-    ethermal=n/mp*10^volume*1.5*kb*t# log10(n/mp)+volume+log10(1.5*kb*t)
+    ethermal=n/mp*10^volume*1.5*kb*t
     return ethermal
   end
 
 #...cosmic ray energy flux
     function ecri(n::Float64,vshock::Float64,volume::Float64)
-     Ecr_inj=0.5*n*vshock^3*10^volume# log10(n*vshock^3.0)+volume  #(+15.)
+     Ecr_inj=0.5*n*vshock^3*10^volume
      return Ecr_inj
    end
 
