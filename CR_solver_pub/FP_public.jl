@@ -8,10 +8,10 @@ Plots.PyPlotBackend()
 using LaTeXStrings
 
         #folders and includes
-        main="/Users/francovazza/Desktop/Julia_prog/FOKKER/SP/momenta/public/"
+        main=""
         include(string(main,"/param_spectra.jl"))
         include(string(main,"/loss_gain1.jl"))
-        const root=string("/Users/francovazza/Desktop/data/DATA/ESCAPE/0/0_1/tracers_all/tracers/")
+        const root=string("/tracers/")
         const root_map=root
         const root_out=root
         const root1=root
@@ -83,7 +83,7 @@ using LaTeXStrings
 
          sel=findall( x->(x >= 2.0),tr[9,:])
         @views   tr[9,:].=0.   #all shocks in the first population are removed - to compare the effect of shocks in the tr2 population
-        @views   tr2[9,sel].=0. #M>2.5 shocks are removed - only shock-recceleration is relevant
+        @views   tr2[9,sel].=0. #M>2.0 shocks are removed - only shock-recceleration is relevant in this regime
 
         lsize=dx*0.1 #linear size of the equivalent volume associated with each tracer. Can be fixed of set variable with the changing density, depending on the setup.                                          \
 
