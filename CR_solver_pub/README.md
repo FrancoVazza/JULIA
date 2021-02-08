@@ -1,5 +1,7 @@
 Welcome!
 
+<img src="bg.png" alt="alt text" width="whatever" height="whatever">
+
 This is the public serial version of the cosmic ray solver (e.g. Fokker Planck without diffusion terms) we developed and used in Vazza, Wittor, Brunetti & Bruggen 2021, to study the advection, aging and re-acceleration of cosmic ray electrons injected by radiogalaxies in the realistic intracluster medium. 
 
 The code requires as input a sequence of tracers data, written in HDF5 format (see /tracers folder for an example dataset), and it computes particle spectra under radiative and coulomb losses, adiabatic compression/rarefaction, and injection+re-acceleration by shock waves. 
