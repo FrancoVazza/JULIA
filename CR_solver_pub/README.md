@@ -20,4 +20,12 @@ A file sample of 25 tracers and 50 timesteps, derived from our simulation, is gi
 
      -  loss_gain1.jl   > containing all acceleration and loss terms, necessary for the Fokker-Planck evolution (Chang & Cooper 1970 - like). 
 
+* This is an example of the particle spectra that the above code should produce
+
+<img src="spectra_out152.png" alt="alt text" width="whatever" height="whatever">
+
+
+
 * Details on the method and on its application to cosmological simulations are described in Vazza, Wittor, Brunetti & Bruggen, 2021 A&A (submitted, as of this writing). 
+
+
