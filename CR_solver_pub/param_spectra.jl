@@ -23,7 +23,7 @@
      const kpc=3.086e21 #cm in one kpc
      const yr=3.154e7 #s in one yr
      const  mp=1.67e-24
-     const  me=0.1093897e-28   #g
+     const  me=9.109-28   #g
      const  msol=1.988e33 #g
      const  vc=2.99792458e10   #cm s-
      const  erest=me*vc^2.
