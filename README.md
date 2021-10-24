@@ -24,6 +24,9 @@ Updated list
 
 9. shocks_test.jl = shock finder for Enzo simulations
 
+10. map_sequence.jl =  
+<img src="web.gif" alt="alt text" width="whatever" height="whatever">
+
 LARGER PROJECTS (all work in progress! ):
 
 - MAPS_ALL : map making for ENZO unigrid simulation, using DistributedArrays(requires Julia v0.6), including shock-finding and computing X-ray emission, Sunyaev Zeldovich, HI, synchrotron and Faraday Rotation).
