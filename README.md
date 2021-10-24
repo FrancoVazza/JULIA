@@ -24,8 +24,8 @@ Updated list
 
 9. shocks_test.jl = shock finder for Enzo simulations
 
-10. map_sequence.jl =  
-<img src="web.gif" alt="alt text" width="whatever" height="whatever">
+10. map_sequence.jl =  program to produce overlays of contours and colors from a sequence of fits files, to produce something like: 
+<img src="Webp.net-gifmaker-132.gif" alt="alt text" width="whatever" height="whatever">
 
 LARGER PROJECTS (all work in progress! ):
 
