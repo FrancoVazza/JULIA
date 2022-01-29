@@ -22,7 +22,7 @@ A file sample of 25 tracers and 50 timesteps, derived from our simulation, is gi
 
 * This is an example of the particle spectra that the above code should produce
 
-<img src="spectra_out152.png" alt="alt text" width="whatever" height="whatever">
+<img src="Webp.net-gifmaker (15).gif" alt="alt text" width="whatever" height="whatever">
 
 
 
