@@ -1,6 +1,6 @@
 Welcome!
 
-<img src="bg.png" alt="alt text" width="whatever" height="whatever">
+<img src="Webp.net-gifmaker-132.gif" alt="alt text" width="whatever" height="whatever">
 
 This is the public serial version of the cosmic ray solver (e.g. Fokker Planck without diffusion terms) we developed and used in Vazza, Wittor, Brunetti & Bruggen 2021, to study the advection, aging and re-acceleration of cosmic ray electrons injected by radiogalaxies in the realistic intracluster medium. 
 
