@@ -26,6 +26,6 @@ A file sample of 25 tracers and 50 timesteps, derived from our simulation, is gi
 
 
 
-* Details on the method and on its application to cosmological simulations are described in Vazza, Wittor, Brunetti & Bruggen, 2021 A&A (submitted, as of this writing). 
+* Details on the method and on its application to cosmological simulations are described in Vazza, Wittor, Brunetti & Bruggen, 2021 A&A https://arxiv.org/abs/2102.04193
 
 
