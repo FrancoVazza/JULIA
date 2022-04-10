@@ -1,7 +1,7 @@
 
 Welcome!
 
-<img src="Webp.net-gifmaker-132.gif" alt="alt text" width="whatever" height="whatever">
+<img src="pic.png" alt="alt text" width="whatever" height="whatever">
 
 This is the (somewhat simplified) public parallel version of the cosmic ray solver (e.g. Fokker Planck without diffusion terms) we developed and used in Vazza, Wittor, di Federico et al. (submitted at the time of this writing), to study the advection, aging and re-acceleration of cosmic ray electrons injected by radiogalaxies in the intracluster medium simulated with the ENZO code (but it can work with any tracer-like datasets). 
 
@@ -24,9 +24,6 @@ A file sample of 99 tracers and 100 timesteps, derived from our simulation, is g
 
 * This is an example of the particle spectra that the above code should produce
 
-<img src="Webp.net-gifmaker (15).gif" alt="alt text" width="whatever" height="whatever">
-
-
-
+<img src="Webp.net-gifmaker-157.gif" alt="alt text" width="whatever" height="whatever">
 * Details on the method and on its application to cosmological simulations are described in the main paper. 
 
