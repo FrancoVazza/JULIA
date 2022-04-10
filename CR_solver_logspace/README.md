@@ -7,7 +7,7 @@ This is the (somewhat simplified) public parallel version of the cosmic ray solv
 
 The code requires as input a sequence of tracers data, written in HDF5 format (see /tracers folder for an example dataset for 99 tracers evolved for 100 timestpes), and it computes particle spectra under radiative and coulomb losses, adiabatic compression/rarefaction, and injection+re-acceleration by shock waves and Fermi II. 
 
-- The input tracer files contain particle ID information and gas physical quantities like gas density [g/cm3], gas temeperature[K], magnetic fields strength [microGauss],  3D vorticity and divergence [1/s] and redshift). 
+- The input tracer files contain particle ID information and gas physical quantities, like gas density [g/cm3], gas temperature[K], magnetic fields strength [microGauss],  3D vorticity and divergence [1/s] and redshift of each snapshot. 
 A file sample of 99 tracers and 100 timesteps, derived from our simulation, is given in the /tracers subfolder
 
 * The main code is FP_new.jl
