@@ -24,6 +24,6 @@ A file sample of 99 tracers and 100 timesteps, derived from our simulation, is g
 
 * This is an example of the particle spectra that the above code should produce
 
-<img src="Webp.net-gifmaker-157.gif" alt="alt text" width="whatever" height="whatever">
+<img src="Webp.net-gifmaker (62).gif" alt="alt text" width="whatever" height="whatever">
 * Details on the method and on its application to cosmological simulations are described in the main paper. 
 
