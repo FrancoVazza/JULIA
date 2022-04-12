@@ -22,7 +22,7 @@ A file sample of 99 tracers and 100 timesteps, derived from our simulation, is g
 
      -  loss_gain_par_log.jl   > containing all acceleration and loss terms, necessary for the Fokker-Planck evolution (Chang & Cooper 1970 - like). 
 
-* This is an example of the particle spectra that the above code should produce
+* The animated gif gives an example of the evolving particle spectra that our method produces for the three implemented ageing/re-acceleration models.
 
 <img src="Webp.net-gifmaker (62).gif" alt="alt text" width="whatever" height="whatever">
 * Details on the method and on its application to cosmological simulations are described in the main paper. 
