@@ -12,7 +12,7 @@ The code requires as input a sequence of tracers data, written in HDF5 format (s
 - The input tracer files contain particle ID information and gas physical quantities, like gas density [g/cm3], gas temperature[K], magnetic fields strength [microGauss],  3D vorticity and divergence [1/s] and redshift of each snapshot. The physical size/mass to be associated to each tracer particle must instead be set within the code. 
 A file sample of 99 tracers and 100 timesteps, derived from our simulation, is given in the /tracers subfolder
 
-* The main code is FP_new.jl
+* The main code is ROGER.jl
 
      - The code generates the simultaneous evolution of the same set of electron spectra, for three different scenarios of cosmic ray acceleration and losses (only cooling - cooling & shock reacceleration or - cooling, shock re-acceleration and turbulent re-acceleration. 
      - The code is already instrumented to run with 4 parallel Julia threads  (it requires the Distributed and SharedArrays packages).
