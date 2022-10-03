@@ -26,6 +26,6 @@ A file sample of 99 tracers and 100 timesteps, derived from our simulation, is g
 
 * The animated gif gives an example of the evolving particle spectra that our method produces for the three implemented ageing/re-acceleration models.
 
-<img src="Webp.net-gifmaker (62).gif" alt="alt text" width="whatever" height="whatever">
+<img src="ROGER_spectra.gif" alt="alt text" width="whatever" height="whatever">
 * Details on the method and on its application to cosmological simulations are described in the main paper. 
 
