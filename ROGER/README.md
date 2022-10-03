@@ -3,7 +3,7 @@ Welcome!
 
 <img src="pic.png" alt="alt text" width="whatever" height="whatever">
 
-This is the public parallel version of the ROGER code (i.e. "Relativistic sOlver for GeV Electrons and for their Radio emission) we developed and used in Vazza, Wittor, di Federico et al. 2022 A\&A), to study the advection, aging and re-acceleration of cosmic ray electrons injected by radiogalaxies in the intracluster medium simulated with the ENZO code (but it can work with any tracer-like datasets). 
+This is the public parallel version of the ROGER code (i.e. "Relativistic sOlver for GeV Electrons and for their Radio emission) we developed and used in Vazza, Wittor, di Federico et al. 2022 (A\&A), to study the advection, aging and re-acceleration of cosmic ray electrons injected by radiogalaxies in the intracluster medium simulated with the ENZO code (but it can work with any tracer-like datasets). 
 
 It is written in 1.4.0 Julia. 
 
