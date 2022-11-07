@@ -217,13 +217,12 @@ local     n_inj=fill(0.0,np)
 local     q_inj=fill(0.0,np)
 local     n_re=fill(0.0,np)
 local     n_trac_v = 100
-local    volume=3*log10(lsize*kpctocm)
+local    volume=3*log10(lsize*kpctocm)   #..users must customise their choice here: at the moment the volume associated with each tracer, relevant to compute the shock injection of CRe, is a generic cell size (side lsize)
 
 
   time_total=0.
  @inbounds @simd for i in 1:ntra
 
-local   @fastmath volume=log10((mass_trac/fi_jet))
 local   ethermal=eth(tra[7,i],volume,tra[8,i])
 
  Ecr_inj=0.
