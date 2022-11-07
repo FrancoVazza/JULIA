@@ -15,7 +15,7 @@
    @everywhere const n=640     #grid size of parent simulation
    @everywhere const dx=10.     #cell resolution in kpc
    @everywhere xc=1/(dx)
-   @everywhere const lsize=dx
+   @everywhere const lsize=dx   #...lsize is also assumed to be the volume associated with each tracer - users must adjust this to their specific needs
    @everywhere ntr0=80     #...number of tracer particles
    @everywhere z_in=0.5     #...initial snapshot
    @everywhere snap_in=103    #...initial snapshot
@@ -202,6 +202,7 @@ println("time per timestep of parallel run=",time()-t00)
     filep1=string(root_out,run,"spectra_new_momenta_radial",snapn,"_",test,".png")
     savefig(filep1)
    #   uncomment to write particle spectra on file for each snapshot
+   #   notice that it won't allow overwriting previously generated HDF5 files with the same names - they must be manually removed
    # filep1=string(root_out,"_radio_tracer_",run,"_",snapn,"_pradio_",test,".hdf5")
    #   h5write(filep1,"N(P)_A",pe[:,:])
    #   h5write(filep1,"N(P)_B",pe2[:,:])
