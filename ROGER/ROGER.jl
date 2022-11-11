@@ -20,7 +20,7 @@
    @everywhere z_in=0.5     #...initial snapshot
    @everywhere snap_in=103    #...initial snapshot
    @everywhere snap_fin=199    #...final snapshot
-   @everywhere dt=3.0e7       #..timestep [yr] - simple constant case
+   @everywhere dt=3.0e7       #..timestep [yr] - simple constant case. 
    @everywhere scale = 2*dx      #...[kpc] - spatial scale used to measure the turbulent energy flux
    @everywhere test=""         #....name of this test run
    @everywhere run="test"      #....run name
@@ -32,7 +32,9 @@
    @everywhere include(string(main,"/param_spectra_par_log.jl"))   #...parameters of spectra
    @everywhere include(string(main,"/loss_gain_par_log.jl"))       #...loss and gain terms
    @everywhere include(string(main,"/analysis_log.jl"))
-#....TRACER INITIALISATION
+
+   
+   #....TRACER INITIALISATION
    @everywhere  snapn=string("",snap_in)
 
    @everywhere  file_trac=string(root_tracers,"_tracers_",snapn,"_public.hdf5")
@@ -42,12 +44,15 @@
    @everywhere mass_trac=msol*5.5e5*fi_jet
 
 
-   global   pe=fill(0.0,np,ntr0)
-   global   pe2=fill(0.0,np,ntr0)
-   global   pe3=fill(0.0,np,ntr0)
+   global   pe=fill(1e-30,np,ntr0)
+   global   pe2=fill(1e-30,np,ntr0)
+   global   pe3=fill(1e-30,np,ntr0)
 
 
-   #...initialisation using the CIOFF model
+   #...initialisation using the CIOFF model - assuming particles are initially injected by radiogalaxies (-> Vazza et al. 2022 A&A for details)
+   #...replace with different spectral initialisations for different problems
+   #...avoid initialising particles with 0 values as this produces NaN.
+
    @everywhere t_on=4.e7*3.154e7    #...t_on [s]
    @everywhere t_off=1.1e5*3.154e7  #...t_off [s]
    @everywhere t_tot=t_on+t_off
@@ -88,6 +93,7 @@
 
    file_trac=string(root_tracers,"_tracers_",snapn,"_public.hdf5")
    z=h5read(file_trac,"Redshift")
+   #for cosmological applications, the link between time and redshift might be included here.
 
     p1=h5read(file_trac, "xcoord")
     @views     tr[1,1:ntr0].=p1[1:ntr0]
@@ -118,7 +124,7 @@
    @views   tr[12,:].=0.    #model C has no turbulent and shock re-acceleration
    @views   tr[9,:].=0.
 
-   if snap <= snap_in+3   #assuming particle are initially in high-speed jets, we manually switch off turbulent re-acceleration
+   if snap <= snap_in+3   #in case particle are initially in fast jets (as in its first application), we prefer to manually switch off turbulent re-acceleration from spurious vorticity
    @views   tr3[12,:].=0.
    end
 
@@ -201,7 +207,9 @@ println("time per timestep of parallel run=",time()-t00)
 
     filep1=string(root_out,run,"spectra_new_momenta_radial",snapn,"_",test,".png")
     savefig(filep1)
-   #   uncomment to write particle spectra on file for each snapshot
+   
+   #   uncomment to write particle spectra on disk for each snapshot
+   #   warning: quite memory consuming since all particles and all momentum bins will be saved 
    #   notice that it won't allow overwriting previously generated HDF5 files with the same names - they must be manually removed
    # filep1=string(root_out,"_radio_tracer_",run,"_",snapn,"_pradio_",test,".hdf5")
    #   h5write(filep1,"N(P)_A",pe[:,:])
