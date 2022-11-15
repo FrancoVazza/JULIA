@@ -133,7 +133,7 @@ end
  ipmin_inj=1
 
   @inbounds @simd    for j in ipmin_inj:np-1
-    @fastmath    n_inj[j]=(Ke*10. ^pval[j])^(-delta)*(1-(10. ^pval[j])/p_cut)^(delta-2)
+    @fastmath    n_inj[j]=Ke*(10. ^pval[j])^(-delta)*(1-(10. ^pval[j])/p_cut)^(delta-2)
     if isnan(n_inj[j]) || isinf(n_inj[j])
        n_inj[j]=0.
          end
