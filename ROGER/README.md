@@ -32,3 +32,4 @@ A file sample of 99 tracers and 100 timesteps, derived from our simulation, is g
 
 * ROGER obvioulsy is an homage to the greatest of all times in tennis, who retired in the same month in which this paper was published: https://www.youtube.com/watch?v=cQCJ_r_szIc
 
+<img src="ROGER_slice.gif" alt="alt text" width="whatever" height="whatever">
