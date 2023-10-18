@@ -5,4 +5,4 @@ This routines do not allow users to actually see the underlying physical models 
 
 * [interpolate_frequencies.jl](https://github.com/FrancoVazza/JULIA/SKA_DC/interpolate_frequencies.jl) - produces N additional IQU maps by interpolating 5 fundamental frequencies.
 
-*[RM_redshift.jl] (https://github.com/FrancoVazza/JULIA/SKA_DC/RM_redshift.jl) - produces RM in a long redshift interval, by replicating and redshift-correcting a set of input boxes (85^3 Mpc^3 volume).
+* [RM_redshift.jl](https://github.com/FrancoVazza/JULIA/SKA_DC/RM_redshift.jl) - produces RM in a long redshift interval, by replicating and redshift-correcting a set of input boxes (85^3 Mpc^3 volume).
