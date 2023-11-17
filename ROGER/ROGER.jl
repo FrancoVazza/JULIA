@@ -13,14 +13,14 @@
    # SIMULATION PARAMETERS
 
    @everywhere const n=640     #grid size of parent simulation
-   @everywhere const dx=10.     #cell resolution in kpc
+   @everywhere const dx=0.001     #cell resolution in kpc
    @everywhere xc=1/(dx)
    @everywhere const lsize=dx   #...lsize is also assumed to be the volume associated with each tracer - users must adjust this to their specific needs
    @everywhere ntr0=80     #...number of tracer particles
    @everywhere z_in=0.5     #...initial snapshot
    @everywhere snap_in=103    #...initial snapshot
    @everywhere snap_fin=199    #...final snapshot
-   @everywhere dt=3.0e7       #..timestep [yr] - simple constant case. 
+   @everywhere dt=5.0e7       #..timestep [yr] - simple constant case. 
    @everywhere scale = 2*dx      #...[kpc] - spatial scale used to measure the turbulent energy flux
    @everywhere test=""         #....name of this test run
    @everywhere run="test"      #....run name
@@ -84,6 +84,33 @@
    end
 
 
+#....plotting of the initial input spectrum (before losses)
+      pe_tot=fill(0.0,np)
+      pe_tot2=fill(0.0,np)
+      pe_tot3=fill(0.0,np)
+   @inbounds @simd   for i in 1:ntr0
+     @inbounds @simd for g in 1:np
+   pe_tot[g]+=(pe[g,i]*10^pval[g])
+   pe_tot2[g]+=(pe2[g,i]*10^pval[g])
+   pe_tot3[g]+=(pe3[g,i]*10^pval[g])
+   end
+   end
+
+   lfs=14
+   xfs=12
+   xtfs=12
+           plot(pval,pe_tot[:],label="losses",color="black",line=:dash,linewidth=1,dpi=500,alpha=0.7,grid=false,legendfontsize=lfs,yguidefontsize=xfs,xguidefontsize=xfs,xtickfontsize=xtfs,ytickfontsize=xtfs)
+           plot!(pval,pe_tot2[:],color="green",label="losses+shocks",line=:dash,linewidth=2,alpha=0.6)
+           plot!(pval,pe_tot3[:],color="red",label="losses+shocks+turb",line=:dash,linewidth=3,alpha=0.5)
+           yaxis!(L"pN(p)",:log10,(1e40,1e65),fonts=20)
+
+       xaxis!(L"\log(P/(m_ec)",(p_min,p_max),fonts=20)
+
+
+       filep1=string(root_out,run,"initial.png")
+       savefig(filep1)
+
+
    println("injection of electrons done, starting simulation")
 
    @inbounds for snap in snap_in:snap_fin
@@ -107,7 +134,13 @@
     @views     tr[8,1:ntr0].=p1[1:ntr0]
     p1=h5read(file_trac, "mach")
     @views     tr[9,1:ntr0].=p1[1:ntr0]
+
+   m_max=maximum(p1[1:ntr0])
+   if m_max > mthr
+   println("Mmax=",m_max)
+    end
     p1=h5read(file_trac, "B")
+
     @views      tr[10,1:ntr0].=(1e-6*p1[1:ntr0])   #..B-field converted into G
     p1=h5read(file_trac, "div_v")
     @views      tr[11,1:ntr0].=p1[1:ntr0]
@@ -188,28 +221,28 @@
    pe_tot2[:]=fetch(r2)
    pe_tot3[:]=fetch(r3)
 
-dp=500
+
 lfs=14
 xfs=12
 xtfs=12
 
-        plot(pval,pe_tot[:],label="losses",color="black",line=:dash,dpi=dp,linewidth=1,alpha=0.7,grid=false,legendfontsize=lfs,yguidefontsize=xfs,xguidefontsize=xfs,xtickfontsize=xtfs,ytickfontsize=xtfs)
+        plot(pval,pe_tot[:],label="losses",color="black",line=:dash,dpi=500,linewidth=1,alpha=0.7,grid=false,legendfontsize=lfs,yguidefontsize=xfs,xguidefontsize=xfs,xtickfontsize=xtfs,ytickfontsize=xtfs)
         plot!(pval,pe_tot2[:],color="green",label="losses+shocks",line=:dash,linewidth=2,alpha=0.6)
         plot!(pval,pe_tot3[:],color="red",label="losses+shocks+turb",line=:dash,linewidth=3,alpha=0.5)
 
 println("time per timestep of parallel run=",time()-t00)
 
     title!(string("z=",zz),fonts=20)
-    yaxis!(L"pN(p)",:log10,(1e40,1e62),fonts=20)
+    yaxis!(L"pN(p)",:log10,(1e40,1e65),fonts=20)
 
     xaxis!(L"\log(P/(m_ec)",(p_min,p_max),fonts=20)
 
 
     filep1=string(root_out,run,"spectra_new_momenta_radial",snapn,"_",test,".png")
     savefig(filep1)
-   
+
    #   uncomment to write particle spectra on disk for each snapshot
-   #   warning: quite memory consuming since all particles and all momentum bins will be saved 
+   #   warning: quite memory consuming since all particles and all momentum bins will be saved
    #   notice that it won't allow overwriting previously generated HDF5 files with the same names - they must be manually removed
    # filep1=string(root_out,"_radio_tracer_",run,"_",snapn,"_pradio_",test,".hdf5")
    #   h5write(filep1,"N(P)_A",pe[:,:])
