@@ -261,12 +261,12 @@ local    shock=0
        println("shock velocity=",vshock)
        shock=1
 
-       if m<2.5
+       if m<5.0 #...also shock re-acceleration is activated 
         shock=2
        end
-           if m>100.0
-           m=100.0
-           end
+       if m>100.0
+       m=100.0
+       end
 
 
      Ecr_inj=ecri(tra[7,i],vshock*1e5,volume)   #...electrons injected by new shocks
