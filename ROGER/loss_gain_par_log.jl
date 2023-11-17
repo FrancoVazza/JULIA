@@ -128,7 +128,7 @@ end
  deltaB=2.1
  end
  local   @fastmath  ibeta=beta_inc(0.5*(deltaB-2),0.5*(3-deltaB),1/(1+p_cut^2))
- local   @fastmath  inteB=(erest/(delta-1))*0.5*ibeta[1]+(p_cut^(1-delta))*(sqrt(1+p_cut^2)-1)
+ local   @fastmath  inteB=(erest/(delta-1))*(0.5*ibeta[1]+(p_cut^(1-delta))*(sqrt(1+p_cut^2)-1))
  local   @fastmath  Ke= (Kep*eta*ecr)/(vpost*inteB)
  ipmin_inj=1
 
@@ -184,7 +184,7 @@ local        turb=scale*1.08e21*curl   #...in cm/s
         nn1=nn[gg]
         nn2=nn[gg+1]
         q1=q_inj[gg]
-        idg=1/(2*(g2-g1))
+        idg=1/((g2-g1))
           nn0=nn[gg]
           nn[gg]=age(idt,idg,a1,bb,g1,q1,nn1,nn2,a2,g2,cc,dd)
 
