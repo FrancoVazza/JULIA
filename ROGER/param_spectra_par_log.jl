@@ -1,7 +1,7 @@
 #...SPECTRAL PARAMETERS
 @everywhere using SpecialFunctions
  @everywhere const  p_max=log10(1e6)
- @everywhere const  p_min=log10(2)
+ @everywhere const  p_min=log10(5)
  @everywhere const  dp=0.1 #...was 20 for best runs
  @everywhere const  part=2  #...1=proton  2=electron
 #..@everywhere constants useful to compute cooling and acceleration terms
