@@ -1,11 +1,7 @@
 @everywhere using LinearAlgebra
-
-
 #.....combination of loss and gains
 @everywhere  function age(idt::Float64,idg::Float64,aa1::Float64,bb::Float64,g1::Float64,q1::Float64,nn1::Float64,nn2::Float64,aa2::Float64,g2::Float64,cc::Float64,dd::Float64)
-
 return @fastmath ((inv(idt+idg*(+cc+aa1 + bb*g1^2)))*(q1+ nn1*(dd)+nn1*idt+nn2*idg*(+cc+aa2+bb*g2^2)))
-
 end
 
 #....advection terms compression/rarefaction terms via Div(v)
@@ -20,7 +16,6 @@ end
 
 #...Coulomb losses
   @everywhere  function coul(cou::Float64,g1::Float64,inth::Float64)
-
 return @fastmath cou*(1+0.0133333*(log(g1*inth)))
 end
 
@@ -63,6 +58,13 @@ local @fastmath  vpost=vpre/(f)
 local @fastmath delta=2. *(m2+ 1.)/(m2-1.)
 local @fastmath zz4=(1. +zz)^4.
 
+#...best fit for DSA model from Boss+22
+local rb0=-1.53
+local rb1=2.4
+local rb2=-1.25
+local rb3=0.22
+local rb4=0.03
+
 local   ic_lose=0.0
 local   diff=0.0
 local   sh_gain=0.0
@@ -97,17 +99,22 @@ local @fastmath dt=1.0*(t2-t1)
   pmin_inj=pval[1]
 
 
- #....computing the normalisation of injected Cosmic Ray electrons by shocks (thermal leakage model from DSA)
- if m >=2
- local @fastmath   eta=5.46*m4-9.78*(m-1)*m4+4.17*(m-1)^2*m4-0.334*(m-1)^3*m4+0.57*(m-1)^4*m4 #Kang & Jones 2007 efficiency
-end
- if m <2
- local @fastmath  eta=1.96e-3*(m2-1)
- end
-# eta=1e-3
- local @fastmath   q=4*m2/(m2-1)
- local @fastmath   Kpe=(mp/me)^(0.5*(q-3))   #...proton to electron ratio From Kang+11, eq.10
- local @fastmath   Kep=inv(Kpe)              #...electron to proton ratio to be used below
+  #...Ryu+2019 model taken from Boss et al. 2022, eq. 4
+   eta=0.0
+
+   if m <=5.0 && m>2.5
+   local @fastmath  eta=-5.95e-4+1.88e-5*m^5.334
+   end
+   if m>5.0 && m <15.0
+   local @fastmath eta=(rb0*m4+rb1*(m-1)+rb2*(m-1)^2.0+rb3*(m-1)^3.0+rb4*(m-1)^4.0)*m4
+    end
+   if m >15.0
+   local eta=0.035
+   end
+  # println("mach=",m,"eta=",eta)
+   local @fastmath   q=4*m2/(m2-1)
+   local @fastmath   Kpe=(mp/me)^(0.5*(q-3))   #...proton to electron ratio From Kang+11, eq.10
+   local @fastmath   Kep=inv(Kpe)              #...electron to proton ratio to be used below
 
  @inbounds @fastmath   for i in 1:np   #finds maximum gamma where tacc < tlosses
  local @fastmath    gam1=sqrt(1+(10. ^pval[i])^2)
@@ -119,6 +126,8 @@ end
           p_cut=10. ^pval[i]
           end
           end
+
+        #  p_cut=1e6
 
  deltaB=delta
  if deltaB >=2.99
@@ -132,7 +141,7 @@ end
  local   @fastmath  Ke= (Kep*eta*ecr)/(vpost*inteB)
  ipmin_inj=1
 
-  @inbounds @simd    for j in ipmin_inj:np-1
+  @inbounds @simd    for j in ipmin_inj:np-2
     @fastmath    n_inj[j]=Ke*(10. ^pval[j])^(-delta)*(1-(10. ^pval[j])/p_cut)^(delta-2)
     if isnan(n_inj[j]) || isinf(n_inj[j])
        n_inj[j]=0.
@@ -145,9 +154,9 @@ end
 #...SHOCK REACCELERATION
   if shock == 2
    local   pmin_re=1
- n_re=reacc3(delta,nn,pend,pmin_re,pval,n_re)
-@views  nn[:]=n_re[:]
- end
+  n_re=reacc3(delta,nn,pend,pmin_re,pval,n_re)
+  @views  nn[:]=n_re[:]
+  end
 
 
 #setting to zero losses that are not valid either for protons (p=1) or electrons (p=2)
@@ -177,9 +186,15 @@ local        cc=adv(div)
 local        turb=scale*1.08e21*curl   #...in cm/s
 
       dd=asa(turb,nth,1e-3*scale,b0*1e6)
-       if turb<=1e1 || turb >=1e8  || shock >=1   #velocity and shock limiters to prevent spurious acceleration from post-shock velocity
-       dd=0.
-       end
+
+         #...a few timescale limiters limiters to prevent unphysical acceleration from the ASA term
+         if dd >=10.0  #...1/Myr
+          dd=10.0
+         end
+          if dd <=1.0/1000.0 || shock>=1
+         dd=0.0
+         end
+
 
         nn1=nn[gg]
         nn2=nn[gg+1]
@@ -243,11 +258,15 @@ local    shock=0
    if m >= mthr && tsub == last_tsub   #...shock injection only done at the last subcycling step
 
        vshock=m*cspre
+       println("shock velocity=",vshock)
        shock=1
 
-       if m<=5.0
-       shock=2
+       if m<2.5
+        shock=2
        end
+           if m>100.0
+           m=100.0
+           end
 
 
      Ecr_inj=ecri(tra[7,i],vshock*1e5,volume)   #...electrons injected by new shocks
