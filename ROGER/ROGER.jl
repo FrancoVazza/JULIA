@@ -40,8 +40,10 @@
    @everywhere  file_trac=string(root_tracers,"_tracers_",snapn,"_public.hdf5")
    tr=Array{Float64}(undef,13,ntr0)
    tr.=0.
-   @everywhere fi_jet=1e-3   #.....initial density of relativistic electrons >pmin wtr thermal electron density
-   @everywhere mass_trac=msol*5.5e5*fi_jet
+   @everywhere fi_jet=1e-4   #.....initial density of relativistic electrons >pmin wtr thermal electron density
+   @everywhere mass_gas=msol*1e8
+   @everywhere mass_trac=mass_gas*fi_jet
+
 
 
    global   pe=fill(1e-30,np,ntr0)
