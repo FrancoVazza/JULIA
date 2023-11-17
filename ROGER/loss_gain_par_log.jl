@@ -232,7 +232,7 @@ local            tmin=1e4
 @fastmath  tpre=tra[8,i]*(16. *m^2)/((5. *m^2-1)*(m^2+3.))
 @fastmath  tpost=tra[8,i]
 local      v2=[tpre,tmin]
-local      tpre=minimum(v2)
+local      tpre=maximum(v2)
 local @fastmath   cspre=1e-5*sqrt(1.666*tpre*kb*inv(mp*1.1))    #...preshock
 
 local    vshock=0.
