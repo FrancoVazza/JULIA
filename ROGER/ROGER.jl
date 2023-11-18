@@ -12,18 +12,18 @@
    @everywhere using HDF5
    # SIMULATION PARAMETERS
 
-   @everywhere const n=640     #grid size of parent simulation
+   @everywhere const n=640        #grid size of parent simulation
    @everywhere const dx=0.001     #cell resolution in kpc
    @everywhere xc=1/(dx)
    @everywhere const lsize=dx   #...lsize is also assumed to be the volume associated with each tracer - users must adjust this to their specific needs
-   @everywhere ntr0=80     #...number of tracer particles
-   @everywhere z_in=0.5     #...initial snapshot
-   @everywhere snap_in=103    #...initial snapshot
-   @everywhere snap_fin=199    #...final snapshot
-   @everywhere dt=5.0e7       #..timestep [yr] - simple constant case. 
-   @everywhere scale = 2*dx      #...[kpc] - spatial scale used to measure the turbulent energy flux
-   @everywhere test=""         #....name of this test run
-   @everywhere run="test"      #....run name
+   @everywhere ntr0=80        #...number of tracer particles
+   @everywhere z_in=0.5        #...initial snapshot
+   @everywhere snap_in=103       #...initial snapshot
+   @everywhere snap_fin=199       #...final snapshot
+   @everywhere dt=5.0e7          #..timestep [yr] - simple constant case. 
+   @everywhere scale = 20.0         #...[kpc] - spatial scale used to measure the vorticity - goes into the turbulent energy flux and Fermi II reacceleration. 
+   @everywhere test=""            #....name of this test run
+   @everywhere run="test"         #....run name
 
    @everywhere main=string("/Users/francovazza/Dropbox/Julia/FOKKER_DEBUG/public/")
    @everywhere root_out=string(main)
