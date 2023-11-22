@@ -21,7 +21,7 @@
    @everywhere snap_in=103       #...initial snapshot
    @everywhere snap_fin=199       #...final snapshot
    @everywhere dt=5.0e7          #..timestep [yr] - simple constant case. 
-   @everywhere scale = 20.0         #...[kpc] - spatial scale used to measure the vorticity - goes into the turbulent energy flux and Fermi II reacceleration. 
+   @everywhere scale = 15.0         #...[kpc] - spatial scale used to measure the vorticity - goes into the turbulent energy flux and Fermi II reacceleration. 
    @everywhere test=""            #....name of this test run
    @everywhere run="test"         #....run name
 
