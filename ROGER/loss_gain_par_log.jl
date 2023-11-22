@@ -187,14 +187,11 @@ local        turb=scale*1.08e21*curl   #...in cm/s
 
       dd=asa(turb,nth,1e-3*scale,b0*1e6)
 
-         #...a few timescale limiters limiters to prevent unphysical acceleration from the ASA term
-         if dd >=10.0  #...1/Myr
-          dd=10.0
-         end
-          if dd <=1.0/1000.0 || shock>=1
-         dd=0.0
-         end
-
+         #...a few timescale limiters limiters to prevent unphysical acceleration from the ASA term. This can improve by switching to a different scheme (to be done) 
+         
+      if turb<=1e1 || turb >=1e8  || shock >=1   #velocity and shock limiters to prevent spurious acceleration from post-shock velocity
+      dd=0.
+      end
 
         nn1=nn[gg]
         nn2=nn[gg+1]
