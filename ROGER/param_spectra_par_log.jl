@@ -13,7 +13,7 @@
  @everywhere const  b3=7.2e-12 #...1/s
  @everywhere const xi=0.5 #
  @everywhere const lcorr=20.0 #...inkpc
- @everywhere const mthr=2.0 #...lower limit for shock injection of CRe - efficiency very uncertain here! 
+ @everywhere const mthr=1.5 #...lower limit for shock injection of CRe - efficiency very uncertain here! 
  @everywhere const gyrtosec=1.0e9*3.0e7
  @everywhere const fi=1e-30
  @everywhere const np=1+(floor(Int64,(p_max-p_min)/dp))
