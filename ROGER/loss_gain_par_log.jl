@@ -183,7 +183,7 @@ local        a2=coul(cou,g2,inth)
 local        bb=bloss(part1,b0,zz4)
 local        cc=adv(div)
 
-local        turb=scale*1.08e21*curl   #...in cm/s
+local        turb=scale*kpc*curl   #...in cm/s
 
       dd=asa(turb,nth,1e-3*scale,b0*1e6)
 
