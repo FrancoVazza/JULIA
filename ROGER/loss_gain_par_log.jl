@@ -1,7 +1,7 @@
 @everywhere using LinearAlgebra
 #.....combination of loss and gains
 @everywhere  function age(idt::Float64,idg::Float64,aa1::Float64,bb::Float64,g1::Float64,q1::Float64,nn1::Float64,nn2::Float64,aa2::Float64,g2::Float64,cc::Float64,dd::Float64)
-return @fastmath ((inv(idt+idg*(+cc+aa1 + bb*g1^2)))*(q1+ nn1*(dd)+nn1*idt+nn2*idg*(+cc+aa2+bb*g2^2)))
+return @fastmath q1+((inv(idt+idg*(+cc+aa1 + bb*g1^2)))*(nn1*(dd)+nn1*idt+nn2*idg*(+cc+aa2+bb*g2^2)))
 end
 
 #....advection terms compression/rarefaction terms via Div(v)
