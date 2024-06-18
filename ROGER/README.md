@@ -36,6 +36,7 @@ A file sample of 99 tracers and 100 timesteps, derived from our simulation, is g
   -  Vazza, Wittor, Di Federico, Bruggen, Brienza et al. 2023 A&A, https://ui.adsabs.harvard.edu/abs/2023A%26A...669A..50V/abstract
   -  Vazza, Wittor, Bruggen, Brunetti 2023, Galaxies, https://ui.adsabs.harvard.edu/abs/2023Galax..11...45V/abstract
   -  Smolinski, Wittor, Bruggen & Vazza 2023, MNRAS, https://ui.adsabs.harvard.edu/abs/2023MNRAS.tmp.2902S/abstract
+  -  Beduzzi, Vazza, Cuciti, Brunetti, Bruggen & Wittor 2024, submitted to A&A, https://arxiv.org/pdf/2406.09859
     
 * A big thank to D. Smolinski, D. Wittor, M. Brueggen and L. Beduzzi for having tested ROGER and having reported to me bugs and mistakes! 
   
