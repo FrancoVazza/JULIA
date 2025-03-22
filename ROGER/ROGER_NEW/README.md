@@ -12,7 +12,10 @@ The solver includes:
 
 Used already for production in Beduzzi et al. 2024 (https://arxiv.org/pdf/2406.09859); Vazza et al. 2025 (https://arxiv.org/abs/2501.19041)
 
+Example of the evolving map of gas density and of radio emission at 150 MHz produced by ROGER:
 
 <img src="E1_dens_radio1.gif" alt="alt text" width="whatever" height="whatever">
 
-<img src="E1_dens_radio1.gif" alt="alt text" width="whatever" height="whatever">
+Example of the evolving momentun spectra of relativistic electrons (for three different models simulated at the same time by ROGER) for a full tracer simulation.
+
+<img src="E62_spectra.gif" alt="alt text" width="whatever" height="whatever">
