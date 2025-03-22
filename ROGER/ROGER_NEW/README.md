@@ -9,8 +9,9 @@ The solver includes:
 * shock re-acceleration from diffusive shock acceleration;
 * Fermi II turbulent re-acceleration based on the adiabatic stochastic acceleration model (ASA).
     
-
-Used already for production in Beduzzi et al. 2024 (https://arxiv.org/pdf/2406.09859); Vazza et al. 2025 (https://arxiv.org/abs/2501.19041)
+ROGER was used for scientific calculations in the following papers:
+-  Beduzzi et al. 2024 (https://arxiv.org/pdf/2406.09859)
+-   Vazza et al. 2025 (https://arxiv.org/abs/2501.19041)
 
 Example of the evolving map of gas density and of radio emission at 150 MHz produced by ROGER:
 
