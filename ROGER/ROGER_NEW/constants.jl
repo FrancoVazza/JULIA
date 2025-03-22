@@ -1,0 +1,36 @@
+#.....BASIC PHYSICAL CONSTANTS
+
+@everywhere const mp=1.67e-24 #proton mass
+@everywhere const kb=1.38e-16 #boltzmann constant
+@everywhere const me=9.1095e-28 #electon mass
+@everywhere const qe=4.8032e-10 #...statcoulomb
+@everywhere const hp=6.62e-27 #planck constant
+@everywhere const vc=299792458e2 #...cm/s
+@everywhere const Γamma=1.66667  #..adiabatic index ideal gas
+@everywhere const fac=Γamma*kb/mp
+@everywhere const G=667e-8 #...cgs
+@everywhere const re=2.817940e-13 #...cm
+@everywhere const keV=1.16e7 #...Kev to K conversion
+@everywhere const mu=0.59
+@everywhere const tcmb=2.73
+@everywhere const sigmat=0.665e-24
+@everywhere const msol=1.989e33
+@everywhere const Mpctocm=3.08567e24
+@everywhere const cmtoMpc=3.08e24
+@everywhere const kpctocm=3.08567e21
+@everywhere const yr=3.154e7
+@everywhere const kpc=3.08567e21
+@everywhere const Myr=3.154e13
+@everywhere const fines=1.0/137.0 #...fine structure
+@everywhere  const Hefrac=0.24
+@everywhere const Hfrac=1-Hefrac
+@everywhere const evtoerg=1.60218e-12 #
+@everywhere const  c1=1.3e-12 #...1/s Coulomb losses constant, Sarazin 1999
+@everywhere const  c1b=3.3e-29 #...1/s Coulomb losses constant, Brunetti & Jones 2014
+ @everywhere const brmss=1.51e-16 #...1/s bremmstrhalung constant, Sarazin 1999
+@everywhere const  b_IC=1.37e-20  #...1/s
+@everywhere const  b_syn=1.3e-9#...1/s
+@everywhere const  cbs=8*fines*re^2*me*vc^2
+@everywhere const  erest=me*vc^2.0
+@everywhere const  prest=mp*vc^2.0
+ @everywhere const gyrtosec=1.0e9*3.0e7
